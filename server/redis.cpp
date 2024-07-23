@@ -1,4 +1,5 @@
-#include <redis.hpp>
+#include "redis.hpp"
+//连接数据库
 
 class redis {
 public:
@@ -10,10 +11,11 @@ public:
         if (rc->err) {
             redisFree(rc);
             printf("Connect to redisServer faile\n");
-            return;
+            return false;
         }
         printf("Connect to redisServer Success\n");
     }
+    //redis命令
     bool Reply_command1(std::string command){
     redisReply *r = (redisReply *)redisCommand(rc, command.c_str());
     if (NULL == r) {
@@ -27,8 +29,6 @@ public:
         return false;
     }
     }
-}
 
-int main(){
-    return 0;
-}
+};
+
