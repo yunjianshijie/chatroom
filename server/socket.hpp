@@ -10,36 +10,38 @@
 #include <unistd.h>
 
 class socket_con {
-    int a;
-
+    
 public:
     int lfd;
-    bool launch() // 服务器启动
+    int launch() // 服务器启动
     {
         lfd = socket(AF_INET, SOCK_STREAM, 0);
-        if (lfd == -1) {
+        if (lfd < 0) {
             perror("socket");
-            return false;
+            return -1;
         }
         struct sockaddr_in addr;
+        memset(&addr, 0, sizeof(addr));
         addr.sin_family = AF_INET;
-        addr.sin_port = htons(10000);      // 大端端口
-        addr.sin_addr.s_addr = INADDR_ANY; // 这个宏的值为0 == 0.0.0.0
-                                           //    inet_pton(AF_INET, "192.168.237.131", &addr.sin_addr.s_addr);
+        addr.sin_port = htons(8080); // 大端端口
+        addr.sin_addr.s_addr = INADDR_ANY;
+        //     inet_pton(AF_INET, "192.168.1.100", &addr.sin_addr.s_addr);
+ 
         int ret = bind(lfd, (struct sockaddr *)&addr, sizeof(addr));
-        if (ret == -1) {
+        if (ret < 0) {
             perror("bind");
-            return false;
+            return -1;
         }
         // bind
         ret = listen(lfd, 125);
         if (ret < 0) {
             std::cerr << "Accept failed" << std::endl;
-            return false;
+            return -1;
         }
-        return true;
+        return  lfd;
     }
     /* shdjsahkdlhd*/
+
     // 返回客户端的fd
     int Connect_clientfd() { // q
         struct sockaddr_in cliaddr;
@@ -57,15 +59,19 @@ public:
     //
     std::string get_new(int cfd) {
         //
+        if (cfd < -1) {
+            printf("客户端cfd为-1");
+            return "";
+        }
         char buf[1024];
         memset(buf, 0, sizeof(buf));
         // 接收消息用客户端文件描述符
-        int len = read(cfd, buf, sizeof(buf));
+        // int len = read(cfd, buf, sizeof(buf));
+        int len = recv(cfd, buf, sizeof(buf), 0);
         if (len > 0) {
             printf("客户端say: %s\n", buf);
             std::string ret(buf);
             return ret;
-
         } else if (len == 0) {
             printf("客户端断开了连接...\n");
             return "";
@@ -76,5 +82,15 @@ public:
         return "";
     }
 
-    //  write(cfd, buf, len);
+    bool push_new(int cfd, std::string str) { // 客户端文件描述符 ，发送string
+                                              // 发送短的
+
+        // write(cfd, str.c_str(), str.size() + 1);
+        int ret = send(cfd, str.c_str(), str.size() + 1, 0);
+        if (ret < str.size()) {
+            std::cout << "发送未完成" << std::endl;
+            return false;
+        }
+        return true;
+    }
 };

@@ -129,6 +129,30 @@ server/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
 .PHONY : server/fast
 
+epoll.o: epoll.cpp.o
+.PHONY : epoll.o
+
+# target to build an object file
+epoll.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/epoll.cpp.o
+.PHONY : epoll.cpp.o
+
+epoll.i: epoll.cpp.i
+.PHONY : epoll.i
+
+# target to preprocess a source file
+epoll.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/epoll.cpp.i
+.PHONY : epoll.cpp.i
+
+epoll.s: epoll.cpp.s
+.PHONY : epoll.s
+
+# target to generate assembly for a file
+epoll.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/epoll.cpp.s
+.PHONY : epoll.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -177,6 +201,30 @@ redis.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/redis.cpp.s
 .PHONY : redis.cpp.s
 
+socket.o: socket.cpp.o
+.PHONY : socket.o
+
+# target to build an object file
+socket.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/socket.cpp.o
+.PHONY : socket.cpp.o
+
+socket.i: socket.cpp.i
+.PHONY : socket.i
+
+# target to preprocess a source file
+socket.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/socket.cpp.i
+.PHONY : socket.cpp.i
+
+socket.s: socket.cpp.s
+.PHONY : socket.s
+
+# target to generate assembly for a file
+socket.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/socket.cpp.s
+.PHONY : socket.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +234,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... server"
+	@echo "... epoll.o"
+	@echo "... epoll.i"
+	@echo "... epoll.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... redis.o"
 	@echo "... redis.i"
 	@echo "... redis.s"
+	@echo "... socket.o"
+	@echo "... socket.i"
+	@echo "... socket.s"
 .PHONY : help
 
 

@@ -8,8 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/yunjian/chatroom/server/epoll.cpp" "CMakeFiles/server.dir/epoll.cpp.o" "gcc" "CMakeFiles/server.dir/epoll.cpp.o.d"
   "/home/yunjian/chatroom/server/main.cpp" "CMakeFiles/server.dir/main.cpp.o" "gcc" "CMakeFiles/server.dir/main.cpp.o.d"
   "/home/yunjian/chatroom/server/redis.cpp" "CMakeFiles/server.dir/redis.cpp.o" "gcc" "CMakeFiles/server.dir/redis.cpp.o.d"
+  "/home/yunjian/chatroom/server/socket.cpp" "CMakeFiles/server.dir/socket.cpp.o" "gcc" "CMakeFiles/server.dir/socket.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

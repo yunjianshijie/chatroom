@@ -1,5 +1,7 @@
-CMakeFiles/server.dir/main.cpp.o: /home/yunjian/chatroom/server/main.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/14.1.1/iostream \
+CMakeFiles/server.dir/socket.cpp.o: \
+ /home/yunjian/chatroom/server/socket.cpp /usr/include/stdc-predef.h \
+ /home/yunjian/chatroom/server/socket.hpp \
+ /usr/include/c++/14.1.1/iostream \
  /usr/include/c++/14.1.1/bits/requires_hosted.h \
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -147,28 +149,11 @@ CMakeFiles/server.dir/main.cpp.o: /home/yunjian/chatroom/server/main.cpp \
  /usr/include/asm/bitsperlong.h /usr/include/asm-generic/bitsperlong.h \
  /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
  /usr/include/bits/types/struct_osockaddr.h /usr/include/bits/in.h \
- /home/yunjian/chatroom/server/epoll.hpp /usr/include/c++/14.1.1/cstring \
- /usr/include/string.h /usr/include/strings.h /usr/include/unistd.h \
+ /usr/include/c++/14.1.1/cstring /usr/include/string.h \
+ /usr/include/strings.h /usr/include/c++/14.1.1/optional \
+ /usr/include/c++/14.1.1/bits/enable_special_members.h \
+ /usr/include/c++/14.1.1/stdlib.h /usr/include/unistd.h \
  /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
  /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
  /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/sys/epoll.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-least.h \
- /usr/include/sys/ioctl.h /usr/include/bits/ioctls.h \
- /usr/include/asm/ioctls.h /usr/include/asm-generic/ioctls.h \
- /usr/include/linux/ioctl.h /usr/include/asm/ioctl.h \
- /usr/include/asm-generic/ioctl.h /usr/include/bits/ioctl-types.h \
- /usr/include/sys/ttydefaults.h /usr/include/bits/epoll.h \
- /usr/include/c++/14.1.1/vector \
- /usr/include/c++/14.1.1/bits/stl_uninitialized.h \
- /usr/include/c++/14.1.1/bits/stl_vector.h \
- /usr/include/c++/14.1.1/bits/stl_bvector.h \
- /usr/include/c++/14.1.1/bits/vector.tcc \
- /home/yunjian/chatroom/server/socket.hpp \
- /usr/include/c++/14.1.1/optional \
- /usr/include/c++/14.1.1/bits/enable_special_members.h \
- /usr/include/c++/14.1.1/stdlib.h /home/yunjian/chatroom/server/redis.hpp \
- /usr/local/include/hiredis/hiredis.h /usr/local/include/hiredis/read.h \
- /usr/include/sys/time.h /usr/local/include/hiredis/sds.h \
- /usr/local/include/hiredis/alloc.h
+ /usr/include/linux/close_range.h

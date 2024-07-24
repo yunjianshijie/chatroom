@@ -1,0 +1,10 @@
+{
+    "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+    "workbench.settings.openDefaultKeybindings": false,
+    "clangd.fallbackFlags": [
+        "-I${workspaceFolder}"
+    ],
+    "files.associations": {
+        "cstdlib": "cpp"
+    }
+}

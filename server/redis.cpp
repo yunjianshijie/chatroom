@@ -18,7 +18,7 @@ public:
     //redis命令
     bool Reply_command1(std::string command){
     redisReply *r = (redisReply *)redisCommand(rc, command.c_str());
-    if (NULL == r) {
+    if ( NULL == r) {
         std::cout << "Execut command1 failure\n";
         redisFree(rc);
         return false;
@@ -29,6 +29,7 @@ public:
         return false;
     }
     }
+    
 
 };
 
