@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/client.dir/main.cpp.o CMakeFiles/client.dir/ui/user_long.cpp.o CMakeFiles/client.dir/ui/ui_printf.cpp.o -o client
