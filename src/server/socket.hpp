@@ -8,9 +8,8 @@
 #include <optional>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include "../include/back.hpp"
 class socket_con {
-    
 public:
     int lfd;
     int launch() // 服务器启动
@@ -23,7 +22,7 @@ public:
         struct sockaddr_in addr;
         memset(&addr, 0, sizeof(addr));
         addr.sin_family = AF_INET;
-        addr.sin_port = htons(8081); // 大端端口
+        addr.sin_port = htons(HAND); // 大端端口
         addr.sin_addr.s_addr = INADDR_ANY;
         //     inet_pton(AF_INET, "192.168.1.100", &addr.sin_addr.s_addr);
  

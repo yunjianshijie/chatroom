@@ -1,10 +1,9 @@
-#include <iostream>
 #include <arpa/inet.h>
 #include "epoll.hpp"
 #include "socket.hpp"
 #include "chuli/redis.hpp"
 #include "chuli/chuli.hpp"
-#define HAND 12345
+
 int main() {
     // 通信
     socket_con a;
@@ -62,19 +61,21 @@ int main() {
                 if (bytes_read > 0) {
                     std::cout << "发来消息来自客户端 " << events[i].data.fd << ": " << buffer << std::endl;
                     // 现在收到传送的消息
-                    char *ret = fanhui(buffer);
+                    std::string ret = fanhui(buffer ,SUCCESS);
+
                     if (ret == "-1") {
                         std::cout << "解析失败" << std::endl;
                         std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
                         continue;
                     }
                     std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
-                    write(events[i].data.fd, ret, sizeof(ret));
+                    
+                    send(events[i].data.fd, ret.c_str(), sizeof(ret.c_str()),0);
                     // 先直接原路返回
                     std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
                     // 发给客户端指令
-                    free(ret);
-                    ret = nullptr;
+                    //free(ret);
+                    //ret = nullptr;
                     // 这个
                 } else if (bytes_read == 0) {
                     std::cout << "Client " << events[i].data.fd << " disconnected" << std::endl;

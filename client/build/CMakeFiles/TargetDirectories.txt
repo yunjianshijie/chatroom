@@ -1,3 +1,0 @@
-/home/yunjian/chatroom/client/build/CMakeFiles/client.dir
-/home/yunjian/chatroom/client/build/CMakeFiles/edit_cache.dir
-/home/yunjian/chatroom/client/build/CMakeFiles/rebuild_cache.dir

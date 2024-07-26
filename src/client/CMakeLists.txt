@@ -2,6 +2,7 @@
 cmake_minimum_required(VERSION 3.0.0) # 版本
 project(CALC) # 名称
 set(CMAKE_CXX_STANDARD 17) # c17
-include_directories(/usr/include)
-include_directories(${CMAKE_SOURCE_DIR}/include)
-add_executable(client main.cpp ui/user_long.cpp ui/ui_printf.cpp)
+# include_directories(/usr/include)
+# include_directories(${CMAKE_SOURCE_DIR}/include)
+add_executable(client main.cpp ui/user_long.cpp ui/ui_printf.cpp json.cpp)
+include(FetchContent)

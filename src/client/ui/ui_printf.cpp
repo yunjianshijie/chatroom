@@ -1,8 +1,6 @@
 #include "ui.hpp"
-#include <string>
-#include <sstream>
-#include <iostream>
 
+#include "../json.hpp"
 int strToNum(std::string str) {
     std::stringstream ss(str);
     int num = 0;
@@ -10,19 +8,21 @@ int strToNum(std::string str) {
     return num;
 }
 
-
-
-void main_t(std::string buf) {
+int main_t(std::string buf) {
+    // 返回 num
     // 用数字出命令
     int num = strToNum(buf);
     std::cout << "num: " << num << std::endl;
-    if (num == 0) {
+    if (num == SUCCESS) {
         register_ui();
+    } else if (num == LOGIN) {
+        //     Account account;
+        // login_ui(account);
+    } else if (num == REGISTER) {
+        Account account;
+        login_ui(account);
     }
-    }
+    return num;
+}
 
 
-
-    // 字符串用<|  |>隔开
-
-    // /*1*//* jdskd */

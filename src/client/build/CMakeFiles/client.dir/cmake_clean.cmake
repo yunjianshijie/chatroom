@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/client.dir/json.cpp.o"
+  "CMakeFiles/client.dir/json.cpp.o.d"
   "CMakeFiles/client.dir/main.cpp.o"
   "CMakeFiles/client.dir/main.cpp.o.d"
   "CMakeFiles/client.dir/ui/ui_printf.cpp.o"

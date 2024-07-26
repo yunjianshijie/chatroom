@@ -9,7 +9,10 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I","/usr/include/nlohmann",
+                "-I","/usr/local/include/nlohmann",
+                
             ],
             "options": {
                 "cwd": "${fileDirname}"

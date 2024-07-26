@@ -1,6 +1,7 @@
 CMakeFiles/client.dir/ui/user_long.cpp.o: \
  /home/yunjian/chatroom/src/client/ui/user_long.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/14.1.1/iostream \
+ /usr/include/stdc-predef.h /home/yunjian/chatroom/src/client/ui/ui.hpp \
+ /usr/include/c++/14.1.1/iostream \
  /usr/include/c++/14.1.1/bits/requires_hosted.h \
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/os_defines.h \
@@ -137,10 +138,11 @@ CMakeFiles/client.dir/ui/user_long.cpp.o: \
  /usr/include/c++/14.1.1/bits/locale_facets.tcc \
  /usr/include/c++/14.1.1/bits/basic_ios.tcc \
  /usr/include/c++/14.1.1/bits/ostream.tcc /usr/include/c++/14.1.1/istream \
- /usr/include/c++/14.1.1/bits/istream.tcc \
- /home/yunjian/chatroom/src/client/ui/ui.hpp \
- /usr/include/c++/14.1.1/vector \
+ /usr/include/c++/14.1.1/bits/istream.tcc /usr/include/c++/14.1.1/vector \
  /usr/include/c++/14.1.1/bits/stl_uninitialized.h \
  /usr/include/c++/14.1.1/bits/stl_vector.h \
  /usr/include/c++/14.1.1/bits/stl_bvector.h \
- /usr/include/c++/14.1.1/bits/vector.tcc
+ /usr/include/c++/14.1.1/bits/vector.tcc /usr/include/c++/14.1.1/sstream \
+ /usr/include/c++/14.1.1/bits/sstream.tcc \
+ /home/yunjian/chatroom/src/client/ui/../../include/account.hpp \
+ /home/yunjian/chatroom/src/client/ui/../../include/back.hpp
