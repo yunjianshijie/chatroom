@@ -1,6 +1,6 @@
 #include "ui.hpp"
-
 #include "../json.hpp"
+
 int strToNum(std::string str) {
     std::stringstream ss(str);
     int num = 0;

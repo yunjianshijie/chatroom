@@ -30,7 +30,9 @@ std::string fanhui(char *buffer, int num) {
         return h;
     }else if(mode == REGISTER)//注册
     {
-        std::string h = numToStr(2);
+        std::string h = numToStr(SUCCESS);
+        //将数据传入数据库
+        
         return h;
     }
     return " error";

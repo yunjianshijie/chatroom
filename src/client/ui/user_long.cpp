@@ -11,7 +11,7 @@ void user_long(std::string UerName) {
     std::cout << "------------------------------------------" << std::endl;
 }
 
-void register_ui() {
+int register_ui() {
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "<1> 登录 " << std::endl;
     std::cout << "<2> 注册 " << std::endl;
@@ -20,10 +20,12 @@ void register_ui() {
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "请输入你的选择: " << std::endl;
     std::cout << "------------------------------------------" << std::endl;
-    
-}
+    int choice;
+    std::cin >> choice;
+    return choice;
+    }
 
-void user_main(std::string UerName, std::string UerIp) {
+int user_main(std::string UerName, std::string UerIp) {
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "        " << UerName << "  的界面            " << std::endl;
     std::cout << "------------------------------------------" << std::endl;
@@ -39,6 +41,10 @@ void user_main(std::string UerName, std::string UerIp) {
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "请输入你的选择: " << std::endl;
     std::cout << "------------------------------------------" << std::endl;
+    int choice;
+    std::cin >> choice;
+    return choice;
+
 }
 
 void user_info(std::string UerName, std::string UerIp) {

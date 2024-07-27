@@ -65,7 +65,6 @@ int main() {
 
                     if (ret == "-1") {
                         std::cout << "解析失败" << std::endl;
-                        std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
                         continue;
                     }
                     std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
@@ -131,3 +130,4 @@ int main() {
     // return 0;
     return 0;
 }
+

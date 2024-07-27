@@ -1,4 +1,6 @@
 #include <iostream>
+#include <nlohmann/json.hpp>
+#include "back.hpp"
 // #include "../client/json.hpp"
 // 在客户端用自己的账户信息，登录后，将账户信息存储在本地
 // 服务端将账户信息存储在数据库中
@@ -26,7 +28,7 @@ private:
     std::string answer;
 
 public:
-//一为密码登录，二为问题登录
+    // 一为密码登录，二为问题登录
     bool login(std::string password, int num) {
         if (num == 1) {
             if (this->password == password) {
@@ -48,14 +50,14 @@ public:
     bool logout() {
         return true;
     }
-    //注册
+    // 注册
     bool registerAccount(std::string name, std::string password, std::string question, std::string answer) {
         this->name = name;
         this->password = password;
         this->question = question;
         this->answer = answer;
         return true;
-}
+    }
     bool changePassword1(std::string answer) {
         if (answer == this->answer) {
             return true;
@@ -77,6 +79,19 @@ public:
         }
         return false;
     }
+    nlohmann::json toJson() {
+        nlohmann::json j;
+        j["mode"] = REGISTER;
+        j["name"] = this->name;
+        j["password"] = this->password;
+        j["question"] = this->question;
+        j["answer"] = this->answer;
+        return j;
+    }
+    std::string toJsonString() {
+        return this->toJson().dump();
+    }
+    
 };
 
 // Account(std::string password) :
