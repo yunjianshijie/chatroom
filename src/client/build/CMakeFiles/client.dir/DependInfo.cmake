@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/yunjian/chatroom/src/client/json.cpp" "CMakeFiles/client.dir/json.cpp.o" "gcc" "CMakeFiles/client.dir/json.cpp.o.d"
   "/home/yunjian/chatroom/src/client/main.cpp" "CMakeFiles/client.dir/main.cpp.o" "gcc" "CMakeFiles/client.dir/main.cpp.o.d"
+  "/home/yunjian/chatroom/src/client/socket.cpp" "CMakeFiles/client.dir/socket.cpp.o" "gcc" "CMakeFiles/client.dir/socket.cpp.o.d"
   "/home/yunjian/chatroom/src/client/ui/ui_printf.cpp" "CMakeFiles/client.dir/ui/ui_printf.cpp.o" "gcc" "CMakeFiles/client.dir/ui/ui_printf.cpp.o.d"
   "/home/yunjian/chatroom/src/client/ui/user_long.cpp" "CMakeFiles/client.dir/ui/user_long.cpp.o" "gcc" "CMakeFiles/client.dir/ui/user_long.cpp.o.d"
   )

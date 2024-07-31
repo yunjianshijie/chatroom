@@ -51,6 +51,12 @@ public:
         return true;
     }
     // 注册
+    std::string get_password(){
+        return this->password;
+    }
+    std::string get_answer() {
+        return this->answer;
+    }
     bool registerAccount(std::string name, std::string password, std::string question, std::string answer) {
         this->name = name;
         this->password = password;

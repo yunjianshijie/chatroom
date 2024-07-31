@@ -1,49 +1,44 @@
-#include <iostream>
-#include <string>
+// #include "ui/ui.hpp"
+#include "socket.hpp"
 #include <cstring>
-#include <hiredis/hiredis.h>
+#include <string>
+#include "json.hpp"
+#include "threadpool.hpp"
+// class Socket;
 int main() {
-    redisContext *rc = redisConnect("127.0.0.1", 6379);
-    if (rc->err) {
-        redisFree(rc);
-        printf("Connect to redisServer faile\n");
-        return 0;
-    }
-    printf("Connect to redisServer Success\n");
-    //
-    const char *command1 = "set stest1 value1";
-    redisReply *r = (redisReply *)redisCommand(rc, command1);
+    // 创建套接字，并检验传输
+    Socket client(HAND); // 创建套接字并连接
+    Account my_account;  // 创建线程账号
+    ThreadPool pool(10); // 创建线程池
+    while (1) {
+        // 发送数据
+        // pool.enqueue([&client, &my_account] {
+        // });
+        std::string xinxi = client.main_t();
+        if (client.r_just()) {
+            xinxi = client.main_t(my_account);
+        }
+        // 输入还没有
+        // 靠服务器上次发来的信号，来判断现在在哪里
+        std::cout << "发送的数据: " << xinxi << std::endl;
+        if (client.send_string(xinxi)) {
+            printf("发送成功\n");
+        }
+        // 接收数据
+        // pool.enqueue([&client] {
 
-    if (NULL == r) {
-        printf("Execut command1 failure\n");
-        redisFree(rc);
-        return 0;
+        // });
+        std::string c_get;
+        c_get = client.receive_string();
+        if (c_get == "") {
+            // continue;
+            return;
+        }
+        std::cout << "服务器说:" << c_get << std::endl;
+        //   根据服务器返回的值，处理来 改变client.mode
+        // 直接在类里面改就可以来
     }
-    if (!(r->type == REDIS_REPLY_STATUS && strcasecmp(r->str, "OK") == 0)) {
-        printf("Failed to execute command[%s]\n", command1);
-        freeReplyObject(r);
-        return 0;
-    }
-   
-    printf("Succeed to execute command[%s]\n", command1);
-//命令一完成
-    const char *command2 = "strlen stest1";
-    r = (redisReply *)redisCommand(rc, command2);
-    if (r->type != REDIS_REPLY_INTEGER) {
-        printf("Failed to execute command[%s]\n", command2);
-        freeReplyObject(r);
-        redisFree(rc);
-        return;
-    }
-    int length = r->integer;
-    freeReplyObject(r);
-    printf("The length of 'stest1' is %d.\n", length);
-    printf("Succeed to execute command[%s]\n", command2);
-
-   
-
-
-    printf("%%2wdadddsa");
+    //关闭套接字
+    // close(fd);
     return 0;
-
 }

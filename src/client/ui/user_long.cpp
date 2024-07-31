@@ -11,7 +11,7 @@ void user_long(std::string UerName) {
     std::cout << "------------------------------------------" << std::endl;
 }
 
-int register_ui() {
+std::string register_ui() {
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "<1> 登录 " << std::endl;
     std::cout << "<2> 注册 " << std::endl;
@@ -20,10 +20,10 @@ int register_ui() {
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "请输入你的选择: " << std::endl;
     std::cout << "------------------------------------------" << std::endl;
-    int choice;
+    std::string choice;
     std::cin >> choice;
     return choice;
-    }
+}
 
 int user_main(std::string UerName, std::string UerIp) {
     std::cout << "------------------------------------------" << std::endl;
@@ -44,13 +44,12 @@ int user_main(std::string UerName, std::string UerIp) {
     int choice;
     std::cin >> choice;
     return choice;
-
 }
 
 void user_info(std::string UerName, std::string UerIp) {
 }
 
-void login_ui(Account &account) {
+void register_ui1(Account &account) {
     std::string pass;
     std::string name;
     std::string answer;
@@ -68,4 +67,21 @@ void login_ui(Account &account) {
     std::cout << "------------------------------------------" << std::endl;
     account.registerAccount(name, pass, question, answer);
     return;
+}
+
+int login_ui(Account &account) {
+    std::cout << "------------------------------------------" << std::endl;
+    std::cout << "输入你的账号id : " << std::endl;
+    std::string id;
+    std::cin >> id;
+    std::cout << "输入你的账号密码: " << std::endl;
+    std::string pass;
+    std::cin >> pass;
+    std::cout << "------------------------------------------" << std::endl;
+    if (account.login(pass,1) == 0){
+        return 1;
+    } else {
+        return 0;
+    }
+    //后面改
 }

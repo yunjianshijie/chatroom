@@ -1,6 +1,26 @@
 
-cmake_minimum_required(VERSION 3.0.0) # 版本
+cmake_minimum_required(VERSION 3.5.0) # 版本
 project(CALC) # 名称
 set(CMAKE_CXX_STANDARD 17) # c17
+
+# 添加头文件路径
+# include_directories(${PROJECT_SOURCE_DIR}/include)
+# include_directories(${PROJECT_SOURCE_DIR}/chuli)
+# include_directories(${PROJECT_SOURCE_DIR}/socket)
+# include_directories(${PROJECT_SOURCE_DIR}/epoll)
+# include_directories(${PROJECT_SOURCE_DIR}/chuli)
+# CFLAGS = -I/usr/include/hiredis
+# LDFLAGS = -L/usr/lib -lhiredis
+# # Add the path to hiredis CMake module files
+# list(APPEND CMAKE_MODULE_PATH "/usr/include/hiredis")
+# # # Find hiredis package
+# find_package(hiredis REQUIRED)
+# # # Include hiredis directories
+#  include_directories(${HIREDIS_INCLUDE_DIRS})
+# # Link hiredis libraries to the target after the target sources
+
 add_executable(server main.cpp chuli/redis.cpp socket.cpp epoll.cpp chuli/chuli.cpp)
+
+target_link_libraries(server hiredis)
+
 include(FetchContent)

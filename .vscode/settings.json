@@ -79,7 +79,9 @@
     "forward_list": "cpp",
     "ranges": "cpp",
     "valarray": "cpp",
-    "bitset": "cpp"
+    "bitset": "cpp",
+    "csignal": "cpp",
+    "*.ipp": "cpp"
   },
   "cmake.sourceDirectory": "/home/yunjian/chatroom/src/server/build/_deps/json-subbuild"
 }

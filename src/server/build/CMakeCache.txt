@@ -237,6 +237,9 @@ FETCHCONTENT_QUIET:BOOL=ON
 //Enables UPDATE_DISCONNECTED behavior for all content population
 FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=OFF
 
+//The directory containing a CMake configuration file for hiredis.
+hiredis_DIR:PATH=hiredis_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries

@@ -3,18 +3,14 @@
 #include "socket.hpp"
 #include "chuli/redis.hpp"
 #include "chuli/chuli.hpp"
-
+#include <hiredis/hiredis.h>
 int main() {
+    Redis redis; // 先创造一个redis对象
     // 通信
-    socket_con a;
-    int server_fd = a.launch();
-    if (server_fd >= 0) {
-        std::cout << "服务器启动成功" << std::endl;
-    } else {
-        std::cout << "服务器启动失败" << std::endl;
+    Socket_con a;
+    if (a.lfd < 0) {
         return 1;
     }
-
     // 用 epoll来多个客户端
     const int MAX_EVENTS = 40;
     struct epoll_event event, events[MAX_EVENTS];
@@ -25,7 +21,7 @@ int main() {
         close(epoll_fd);
         return 1;
     }
-    if (s_add_epoll(&event, epoll_fd, server_fd) < 0) {
+    if (s_add_epoll(&event, epoll_fd, a.lfd) < 0) {
         return 1;
     }
     while (1) {
@@ -36,9 +32,9 @@ int main() {
             continue;
         }
         for (int i = 0; i < nfds; i++) {
-            if (events[i].data.fd == server_fd) {
+            if (events[i].data.fd == a.lfd) {
                 // 有新的请求
-                int client_fd = accept(server_fd, nullptr, nullptr);
+                int client_fd = accept(a.lfd, nullptr, nullptr);
                 if (client_fd < 0) {
                     std::cerr << "Failed to accept connection" << std::endl;
                     continue;
@@ -61,20 +57,20 @@ int main() {
                 if (bytes_read > 0) {
                     std::cout << "发来消息来自客户端 " << events[i].data.fd << ": " << buffer << std::endl;
                     // 现在收到传送的消息
-                    std::string ret = fanhui(buffer ,SUCCESS);
+                    std::string ret = fanhui(buffer, SUCCESS);
 
                     if (ret == "-1") {
                         std::cout << "解析失败" << std::endl;
                         continue;
                     }
                     std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
-                    
-                    send(events[i].data.fd, ret.c_str(), sizeof(ret.c_str()),0);
+
+                    send(events[i].data.fd, ret.c_str(), sizeof(ret.c_str()), 0);
                     // 先直接原路返回
                     std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
                     // 发给客户端指令
-                    //free(ret);
-                    //ret = nullptr;
+                    // free(ret);
+                    // ret = nullptr;
                     // 这个
                 } else if (bytes_read == 0) {
                     std::cout << "Client " << events[i].data.fd << " disconnected" << std::endl;
@@ -98,8 +94,7 @@ int main() {
             }
         }
     }
-    close(server_fd);
-    close(epoll_fd);
+ 
     return 0;
     //
     //    int cfd[40];
@@ -130,4 +125,3 @@ int main() {
     // return 0;
     return 0;
 }
-

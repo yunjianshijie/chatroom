@@ -16,10 +16,26 @@ bool s_add_epoll(struct epoll_event *event, int epoll_fd, int server_fd) {
         return false;
     }
     return true;
+}
+
+Epoll::Epoll(int num) {
+    try {
+        struct epoll_event event, events[num];
+        int epoll_fd = epoll_create1(0);                                 // 创建 epoll实例
+        if (epoll_fd == -1) {                                            // 创建失败
+            throw std::runtime_error("Failed to create epoll instance"); // 抛出异常
+        }
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
     }
+}
+
+Epoll::~Epoll() {
+    close(epoll_fd); // 关闭 epoll实例
+}
+
+void Epoll::epoll_do(){
     
 
 
-// int main(){
-//     return 0;
-// }
+}

@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/client.dir/json.cpp.o.d"
   "CMakeFiles/client.dir/main.cpp.o"
   "CMakeFiles/client.dir/main.cpp.o.d"
+  "CMakeFiles/client.dir/socket.cpp.o"
+  "CMakeFiles/client.dir/socket.cpp.o.d"
   "CMakeFiles/client.dir/ui/ui_printf.cpp.o"
   "CMakeFiles/client.dir/ui/ui_printf.cpp.o.d"
   "CMakeFiles/client.dir/ui/user_long.cpp.o"

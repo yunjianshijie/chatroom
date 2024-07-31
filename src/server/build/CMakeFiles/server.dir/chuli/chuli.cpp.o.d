@@ -2,7 +2,6 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /home/yunjian/chatroom/src/server/chuli/chuli.cpp \
  /usr/include/stdc-predef.h \
  /home/yunjian/chatroom/src/server/chuli/chuli.hpp \
- /home/yunjian/chatroom/src/server/chuli/redis.hpp \
  /usr/include/c++/14.1.1/iostream \
  /usr/include/c++/14.1.1/bits/requires_hosted.h \
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -140,21 +139,15 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/c++/14.1.1/bits/locale_facets.tcc \
  /usr/include/c++/14.1.1/bits/basic_ios.tcc \
  /usr/include/c++/14.1.1/bits/ostream.tcc /usr/include/c++/14.1.1/istream \
- /usr/include/c++/14.1.1/bits/istream.tcc /usr/include/c++/14.1.1/cstring \
- /usr/include/string.h /usr/include/strings.h \
- /usr/local/include/hiredis/hiredis.h /usr/local/include/hiredis/read.h \
- /usr/include/sys/time.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h /usr/local/include/hiredis/sds.h \
- /usr/local/include/hiredis/alloc.h \
+ /usr/include/c++/14.1.1/bits/istream.tcc \
  /home/yunjian/chatroom/src/server/chuli/../../include/back.hpp \
  /usr/include/c++/14.1.1/vector \
  /usr/include/c++/14.1.1/bits/stl_uninitialized.h \
  /usr/include/c++/14.1.1/bits/stl_vector.h \
  /usr/include/c++/14.1.1/bits/stl_bvector.h \
- /usr/include/c++/14.1.1/bits/vector.tcc /usr/include/nlohmann/json.hpp \
- /usr/include/c++/14.1.1/algorithm \
+ /usr/include/c++/14.1.1/bits/vector.tcc /usr/include/c++/14.1.1/cstring \
+ /usr/include/string.h /usr/include/strings.h \
+ /usr/include/nlohmann/json.hpp /usr/include/c++/14.1.1/algorithm \
  /usr/include/c++/14.1.1/bits/stl_algo.h \
  /usr/include/c++/14.1.1/bits/algorithmfwd.h \
  /usr/include/c++/14.1.1/bits/stl_heap.h \
@@ -177,6 +170,9 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/c++/14.1.1/memory \
  /usr/include/c++/14.1.1/bits/stl_raw_storage_iter.h \
  /usr/include/c++/14.1.1/bits/align.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
+ /usr/include/bits/stdint-least.h \
  /usr/include/c++/14.1.1/bits/unique_ptr.h \
  /usr/include/c++/14.1.1/bits/shared_ptr.h \
  /usr/include/c++/14.1.1/bits/shared_ptr_base.h \
