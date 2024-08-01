@@ -1,7 +1,6 @@
 #include <arpa/inet.h>
 #include "epoll.hpp"
 #include "socket.hpp"
-#include "chuli/redis.hpp"
 #include "chuli/chuli.hpp"
 #include <hiredis/hiredis.h>
 int main() {
@@ -55,22 +54,19 @@ int main() {
                 memset(buffer, 0, 1024);
                 ssize_t bytes_read = read(events[i].data.fd, buffer, 1024 - 1);
                 if (bytes_read > 0) {
-                    std::cout << "发来消息来自客户端 " << events[i].data.fd << ": " << buffer << std::endl;
+                    std::cout << "来自客户端 fd " << events[i].data.fd<<"  发来消息 "  << ": " << buffer << std::endl;
                     // 现在收到传送的消息
-                    std::string ret = fanhui(buffer, SUCCESS);
-
+                    // 处理消息
+                    std::string ret = fanhui(buffer, SUCCESS, redis);
+                    
                     if (ret == "-1") {
                         std::cout << "解析失败" << std::endl;
                         continue;
                     }
-                    std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
-
-                    send(events[i].data.fd, ret.c_str(), sizeof(ret.c_str()), 0);
-                    // 先直接原路返回
-                    std::cout << "发送 给 " << events[i].data.fd << " :" << ret << std::endl;
+                    send(events[i].data.fd, ret.c_str(), 1024, 0); // 发送消息
+                    
+                    std::cout << "发送 给 fd" << events[i].data.fd << " :" << ret << std::endl;
                     // 发给客户端指令
-                    // free(ret);
-                    // ret = nullptr;
                     // 这个
                 } else if (bytes_read == 0) {
                     std::cout << "Client " << events[i].data.fd << " disconnected" << std::endl;
@@ -81,20 +77,19 @@ int main() {
                     close(events[i].data.fd);
                     //   // client_fds.erase(std::remove(client_fds.begin(), client_fds.end(), events[i].data.fd), client_fds.end());
                     //   // 删除client_fds中的元素
-                    //!!还没删
+                    client_fds.erase(std::remove(client_fds.begin(), client_fds.end(), events[i].data.fd), client_fds.end());
                 } else {
                     std::cerr << "Failed to read from client socket" << std::endl;
                     if (epoll_ctl(epoll_fd, EPOLL_CTL_DEL, events[i].data.fd, nullptr) < 0) {
                         std::cerr << "Failed to remove client socket from epoll" << std::endl;
                     }
                     close(events[i].data.fd);
-                    //   auto it = std::find(client_fds.begin(), client_fds.end(), events[i].data.fd);
-                    //   client_fds.erase(it, client_fds.end());
+                    client_fds.erase(std::remove(client_fds.begin(), client_fds.end(), events[i].data.fd), client_fds.end());
                 }
             }
         }
     }
- 
+
     return 0;
     //
     //    int cfd[40];
@@ -123,5 +118,4 @@ int main() {
     // 分配线程处理
     // 返回有的值
     // return 0;
-    return 0;
 }

@@ -30,18 +30,22 @@ private:
 public:
     int client_fd;
     int mun;
-    int mode; // mode 记录之后的操作
+    int mode;           // mode 记录之后的操作
     Socket(int handle); // handle 是服务器端口号
     ~Socket() {
-        close(client_fd); //关闭客户端的ip
+        close(client_fd); // 关闭客户端的ip
     }
-    void socket_do(); // 处理主要逻辑
-    bool send_string(std::string chuan);
-    std::string receive_string(); // 接收数据
-    bool send_json_usr(Account &account); // 发送注册json数据 
-    std::string receive_json_usr_id(); // 接收注册json数据
-    bool remember_id(std::string id); // 记住id
-    
+    void socket_do();                                  // 处理主要逻辑
+    bool send_string(std::string chuan);               // 发送数据
+    std::string receive_string();                      // 接受数据
+    bool send_json_usr_register(Account &account);     // 发送注册json数据
+    std::string receive_json_usr_id();                 // 接收注册json数据
+    bool remember_id(std::string id);                  // 记住id
+    Account receive_json_usr_login();                  // 接收登录json数据
+    std::string send_json_usr_login(Account &account); // 发送登录json数据
+
+    bool error_string(std::string str); // 错误信息
+
     // std::string main_t() {
     //     // 处理服务器返回的数据
     //     // 返回发给服务器的josn数据
@@ -73,33 +77,33 @@ public:
     //     }
     //     return "exit";
     // }
-//     std::string main_t(Account &account) { // 处理服务器返回的数据
-//         // 重载
-//         //  如果是对于账号的操作写这里
-//         this->mode = strToNum(this->buf);
-//         std::cout << "mode: " << this->mode << std::endl;
-//         if (this->mode == LOGIN) { // 登录
-//             //  Account account;
-//             // login_ui(account);
-//             this->mode = SUCCESS;
-//         } else if (this->mode == REGISTER) { // 注册
-//             register_ui1(account);
-//             this->mode = SUCCESS;
-//             return account.toJsonString();
-//         }
-//         return "";
-//     }
-//     std::string get_string() {
-//         std::string str;
-//         std::cin >> str;
-//         return str;
-//     }
-//     int r_just() {
-//         return this->just;
-//     }
-//     void r_just(bool just) {
-//         this->just = just;
-//     }
+    //     std::string main_t(Account &account) { // 处理服务器返回的数据
+    //         // 重载
+    //         //  如果是对于账号的操作写这里
+    //         this->mode = strToNum(this->buf);
+    //         std::cout << "mode: " << this->mode << std::endl;
+    //         if (this->mode == LOGIN) { // 登录
+    //             //  Account account;
+    //             // login_ui(account);
+    //             this->mode = SUCCESS;
+    //         } else if (this->mode == REGISTER) { // 注册
+    //             register_ui1(account);
+    //             this->mode = SUCCESS;
+    //             return account.toJsonString();
+    //         }
+    //         return "";
+    //     }
+    //     std::string get_string() {
+    //         std::string str;
+    //         std::cin >> str;
+    //         return str;
+    //     }
+    //     int r_just() {
+    //         return this->just;
+    //     }
+    //     void r_just(bool just) {
+    //         this->just = just;
+    //     }
 };
 
 // socket::socket(/* args */)

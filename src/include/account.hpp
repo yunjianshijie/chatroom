@@ -12,7 +12,7 @@ public:
     // 保密问题
     std::string question;
     // 账户的id
-    int id;
+    std::string id;
 
     Account() = default; // 默认
     ~Account() = default;
@@ -20,6 +20,9 @@ public:
     Account(std::string name, std::string password, std::string question, std::string answer) :
         name(name), password(password), question(question), answer(answer) {
     }
+    Account(std::string name, std::string password, std::string question, std::string answer, std::string id):
+        name(name), password(password), question(question), answer(answer), id(id) {
+        }
     // 私密
 private:
     // 账户的密码
@@ -85,19 +88,38 @@ public:
         }
         return false;
     }
-    nlohmann::json toJson() {
+    bool changeAnswer(std::string answer, std::string password) { //修改答案
+        if (this->password == password) {
+            this->answer = answer;
+            return true;
+        }
+        return false;
+    }
+
+
+
+    nlohmann::json toJson(int mode) {
         nlohmann::json j;
-        j["mode"] = REGISTER;
+        if (mode != -2) {
+             j["mode"] = mode; 
+        }
         j["name"] = this->name;
         j["password"] = this->password;
         j["question"] = this->question;
         j["answer"] = this->answer;
         return j;
     }
-    std::string toJsonString() {
-        return this->toJson().dump();
+
+    std::string toJsonString(int  mode) {
+        return this->toJson(mode).dump();
     }
-    
+    void set_pass(std::string password) {
+        this->password = password;
+    }
+    void set_answer(std::string answer) {
+        this->answer = answer;
+    }
+
 };
 
 // Account(std::string password) :

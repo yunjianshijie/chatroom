@@ -2,8 +2,6 @@
 #include "json.hpp"
 #include "../include/account.hpp"
 
-
-
 std::string get_josn(std::string new_string, int num) {
     if (num == SUCCESS) {
         // 1 .登录
@@ -24,12 +22,11 @@ std::string get_josn(std::string new_string, int num) {
     return "{\"mode\": -1}";
 }
 
-std::string get_josn(Account  &accout, int num) {
-    if (num == REGISTER) {
-        std::string str = accout.toJsonString();
-        return str;
-    }
-    return "";
+std::string get_josn(Account &accout, int mode) {
+    std::string str = accout.toJsonString(mode);
+    return str;
+
+    // return "";
 }
 
 // mode 是 int

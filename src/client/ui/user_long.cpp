@@ -25,7 +25,7 @@ std::string register_ui() {
     return choice;
 }
 
-int user_main(std::string UerName, std::string UerIp) {
+int user_main(std::string UerName, std::string UerID) {
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "        " << UerName << "  的界面            " << std::endl;
     std::cout << "------------------------------------------" << std::endl;
@@ -78,10 +78,18 @@ int login_ui(Account &account) {
     std::string pass;
     std::cin >> pass;
     std::cout << "------------------------------------------" << std::endl;
-    if (account.login(pass,1) == 0){
-        return 1;
-    } else {
-        return 0;
-    }
-    //后面改
+    account.id = id;
+    account.set_pass(pass);
+    return 0; //不用了
+    // 给服务器发送登录请求
+    // mode 3
+    // id pass
+    //  if (account.login(pass,1) == 0){
+    //      std::cout << "登录成功" << std::endl;
+    //      return 1;
+    //  } else {
+    //      std::cout << "密码错误或账号不存在" << std::endl;
+    //      return 0;
+    //  }
+    // 后面改
 }
