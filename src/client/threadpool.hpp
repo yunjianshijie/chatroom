@@ -7,6 +7,9 @@
 #include <functional>
 #include <future>
 #include <cstddef>
+
+// void receive_message(Socket &client);
+void process_messages(Socket &client);
 class ThreadPool {
 public:
     ThreadPool(int num_threads); // 多少个线程
@@ -54,7 +57,7 @@ void ThreadPool::worker() {
     while (true) {
         std::function<void()> task;
         {
-            std::unique_lock<std::mutex> lock(tasks_mutex);                  
+            std::unique_lock<std::mutex> lock(tasks_mutex);
             condition.wait(lock, [this] { return !tasks.empty() || stop; }); // 如果队列为空，则等待
             if (stop && tasks.empty()) {
                 return;
@@ -65,6 +68,7 @@ void ThreadPool::worker() {
         task(); // 执行任务
     }
 }
+
 
 // int main() {
 //     ThreadPool pool(4);

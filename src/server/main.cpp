@@ -39,6 +39,7 @@ int main() {
                     continue;
                 }
                 std::cout << "新的连接在自客户端 " << client_fd << std::endl;
+
                 // 将新客户端 socket 加入 epoll 监听
                 event.data.fd = client_fd;
                 event.events = EPOLLIN;
@@ -47,6 +48,7 @@ int main() {
                     close(client_fd);
                     continue;
                 }
+                // redis.set_offline(std::to_string(client_fd)); // 设置为离线
                 client_fds.push_back(client_fd);
             } else {
                 // 有数据到达
@@ -54,11 +56,11 @@ int main() {
                 memset(buffer, 0, 1024);
                 ssize_t bytes_read = read(events[i].data.fd, buffer, 1024 - 1);
                 if (bytes_read > 0) {
-                    std::cout << "来自客户端 fd " << events[i].data.fd<<"  发来消息 "  << ": " << buffer << std::endl;
+                    std::cout << "来自客户端 fd " << events[i].data.fd << "  发来消息 " << ": " << buffer << std::endl;
                     // 现在收到传送的消息
                     // 处理消息
-                    std::string ret = fanhui(buffer, SUCCESS, redis);
-                    
+                    std::string ret = fanhui(buffer, redis, events[i].data.fd);
+
                     if (ret == "-1") {
                         std::cout << "解析失败" << std::endl;
                         continue;
@@ -71,6 +73,7 @@ int main() {
                 } else if (bytes_read == 0) {
                     std::cout << "Client " << events[i].data.fd << " disconnected" << std::endl;
                     //
+                    redis.set_offline(std::to_string(events[i].data.fd)); // 设置为离线
                     if (epoll_ctl(epoll_fd, EPOLL_CTL_DEL, events[i].data.fd, nullptr) < 0) {
                         std::cerr << "Failed to remove client socket from epoll" << std::endl;
                     }

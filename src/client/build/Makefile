@@ -129,30 +129,6 @@ client/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
 .PHONY : client/fast
 
-json.o: json.cpp.o
-.PHONY : json.o
-
-# target to build an object file
-json.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/json.cpp.o
-.PHONY : json.cpp.o
-
-json.i: json.cpp.i
-.PHONY : json.i
-
-# target to preprocess a source file
-json.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/json.cpp.i
-.PHONY : json.cpp.i
-
-json.s: json.cpp.s
-.PHONY : json.s
-
-# target to generate assembly for a file
-json.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/json.cpp.s
-.PHONY : json.cpp.s
-
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -201,29 +177,29 @@ socket.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/socket.cpp.s
 .PHONY : socket.cpp.s
 
-ui/ui_printf.o: ui/ui_printf.cpp.o
-.PHONY : ui/ui_printf.o
+socket1.o: socket1.cpp.o
+.PHONY : socket1.o
 
 # target to build an object file
-ui/ui_printf.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/ui/ui_printf.cpp.o
-.PHONY : ui/ui_printf.cpp.o
+socket1.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/socket1.cpp.o
+.PHONY : socket1.cpp.o
 
-ui/ui_printf.i: ui/ui_printf.cpp.i
-.PHONY : ui/ui_printf.i
+socket1.i: socket1.cpp.i
+.PHONY : socket1.i
 
 # target to preprocess a source file
-ui/ui_printf.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/ui/ui_printf.cpp.i
-.PHONY : ui/ui_printf.cpp.i
+socket1.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/socket1.cpp.i
+.PHONY : socket1.cpp.i
 
-ui/ui_printf.s: ui/ui_printf.cpp.s
-.PHONY : ui/ui_printf.s
+socket1.s: socket1.cpp.s
+.PHONY : socket1.s
 
 # target to generate assembly for a file
-ui/ui_printf.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/ui/ui_printf.cpp.s
-.PHONY : ui/ui_printf.cpp.s
+socket1.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/socket1.cpp.s
+.PHONY : socket1.cpp.s
 
 ui/user_long.o: ui/user_long.cpp.o
 .PHONY : ui/user_long.o
@@ -258,18 +234,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... client"
-	@echo "... json.o"
-	@echo "... json.i"
-	@echo "... json.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... socket.o"
 	@echo "... socket.i"
 	@echo "... socket.s"
-	@echo "... ui/ui_printf.o"
-	@echo "... ui/ui_printf.i"
-	@echo "... ui/ui_printf.s"
+	@echo "... socket1.o"
+	@echo "... socket1.i"
+	@echo "... socket1.s"
 	@echo "... ui/user_long.o"
 	@echo "... ui/user_long.i"
 	@echo "... ui/user_long.s"

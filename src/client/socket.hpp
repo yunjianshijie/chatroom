@@ -1,3 +1,17 @@
+// // #include <iostream>
+// // #include <string>
+// // #include <arpa/inet.h>
+// // #include <sys/types.h>
+// // #include <sys/socket.h>
+// // #include <netinet/in.h>
+// // #include <cstring>
+// // #include <optional>
+// // #include <stdlib.h>
+// // #include <unistd.h>
+// // #include "../include/back.hpp"
+// // #include <nlohmann/json.hpp>
+// // #include "ui/ui.hpp"
+// #include "user.hpp"
 #include <iostream>
 #include <string>
 #include <arpa/inet.h>
@@ -11,14 +25,16 @@
 #include "../include/back.hpp"
 #include <nlohmann/json.hpp>
 #include "ui/ui.hpp"
-
+#include <queue>
+#include <thread>
+#include <future>
 class Socket {
 private:
     /* data */
-    int server_fd;
-    struct sockaddr_in addr;
-    int just;        // 如果是1，则代表非用户操作, 如果是2，则代表用户操作
-    std::string buf; // 服务器传回来的信息
+
+    struct sockaddr_in addr; //
+    int just;                // 如果是1，则代表非用户操作, 如果是2，则代表用户操作
+    Account account;
     int strToNum(std::string str) {
         std::stringstream ss(str);
         // 如果传回来不是数字就用josn读回来
@@ -26,12 +42,26 @@ private:
         ss >> num;
         return num;
     }
+    // std::queue<std::string> messageQueue;
+    // std::mutex queueMutex;
+    // std::condition_variable queueCondVar;
+    // 消息队列
+    std::queue<std::string> message_queue;
+    // 队列互斥锁
+    std::mutex queue_mutex;
+    // 条件变量
+    std::condition_variable queue_cv;
+    // 线程结束标志
+    std::mutex mtx;
+    std::condition_variable cv;
+    bool result_ready = false;
 
 public:
-    int client_fd;
-    int mun;
-    int mode;           // mode 记录之后的操作
-    Socket(int handle); // handle 是服务器端口号
+    int server_fd;
+    std::string buf;                 // 服务器传回来的信息
+    int client_fd;                   // 客户端ip
+    int mode;                        // mode 记录之后的操作
+    Socket(int handle, char ip[30]); // handle 是服务器端口号
     ~Socket() {
         close(client_fd); // 关闭客户端的ip
     }
@@ -43,73 +73,52 @@ public:
     bool remember_id(std::string id);                  // 记住id
     Account receive_json_usr_login();                  // 接收登录json数据
     std::string send_json_usr_login(Account &account); // 发送登录json数据
-
+    std::string send_json_usr_exit();                  // 退出登录json数据
+    // 登录成功发送
+    std::string send_josn_login_success();
     bool error_string(std::string str); // 错误信息
+    bool change_pass(Account &account); // 修改密码
 
-    // std::string main_t() {
-    //     // 处理服务器返回的数据
-    //     // 返回发给服务器的josn数据
-    //     //
-    //     this->mode = strToNum(this->buf);
-    //     std::cout << "mode: " << this->mode << std::endl;
-    //     // 由于没有改 mode
-    //     if (this->mode == SUCCESS) { // 0
-    //         // 第一个页面
-    //         int model = register_ui();
-    //         printf("11\n");
-    //         if (model == LOGIN) { // 登录
-    //             this->just = 2;
-    //             // 这里 不能改服务器传回来的消息
-    //             //     this->buf = "1";
-    //         } else if (model == REGISTER) {
-    //             this->just = 2;
-    //             //  this->buf = "2";
-    //             // 注册
-    //         }
-    //         nlohmann::json json;
-    //         json["mode"] = model;
-    //         return json.dump();
+    // 结束在Usr
+    // 进入用户界面
+    void user_run();
+    // 查看自己信息1
+    void showSelfInfo();
+    // 查询用户2
+    void queryUser();
+    // 查看好友列表3
+    void showFriendList();
+    // 查看群聊列表4
+    void showGroupList();
+    // 添加好友5
+    void addFriend();
+    // 查看好友申请6
+    void apply_FriendList();
+    // 查看群聊申请7
+    void apply_GroupList();
+    // 添加群聊8
+    void addGroup();
+    // 创建群聊9
+    void createGroup();
+    // 查看聊天记录10
+    void showChatRecord();
+    // 注销账号11
+    bool cancel();
+    // 好友
+    std::string send_json_user_que(std::string id); // 发送添加好友请求
 
-    //     } else if (this->mode == FORGET_PASSWORD) {
-    //         // 忘记密码
-    //         // 忘记密码
-    //         // 还没写。。
-    //     }
-    //     return "exit";
-    // }
-    //     std::string main_t(Account &account) { // 处理服务器返回的数据
-    //         // 重载
-    //         //  如果是对于账号的操作写这里
-    //         this->mode = strToNum(this->buf);
-    //         std::cout << "mode: " << this->mode << std::endl;
-    //         if (this->mode == LOGIN) { // 登录
-    //             //  Account account;
-    //             // login_ui(account);
-    //             this->mode = SUCCESS;
-    //         } else if (this->mode == REGISTER) { // 注册
-    //             register_ui1(account);
-    //             this->mode = SUCCESS;
-    //             return account.toJsonString();
-    //         }
-    //         return "";
-    //     }
-    //     std::string get_string() {
-    //         std::string str;
-    //         std::cin >> str;
-    //         return str;
-    //     }
-    //     int r_just() {
-    //         return this->just;
-    //     }
-    //     void r_just(bool just) {
-    //         this->just = just;
-    //     }
+    // std::string send_string(std::string chuan); // 发送字符串
+    // 修改昵称
+    void change_name();
+    // 接受消息
+    std::string receive_message();
+    // 线程接收消息
+    void receive_json();                         //
+    void receive_josn_user(std::string massage); //
+
+    // 打印用户信息
+    void print_user_qu(std::string massage);
+    void print_friend_add(std::string message);
+    void print_friend_add_2(std::string message);
+    void print_friend_apply_list(std::string message); // 打印好友申请列表
 };
-
-// socket::socket(/* args */)
-// {
-// }
-
-// socket::~socket()
-// {
-// }

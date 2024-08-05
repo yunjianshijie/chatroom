@@ -1,8 +1,6 @@
-CMakeFiles/server.dir/chuli/chuli.cpp.o: \
- /home/yunjian/chatroom/src/server/chuli/chuli.cpp \
- /usr/include/stdc-predef.h \
- /home/yunjian/chatroom/src/server/chuli/chuli.hpp \
- /home/yunjian/chatroom/src/server/chuli/redis.hpp \
+CMakeFiles/client.dir/socket1.cpp.o: \
+ /home/yunjian/chatroom/src/client/socket1.cpp /usr/include/stdc-predef.h \
+ /home/yunjian/chatroom/src/client/socket.hpp \
  /usr/include/c++/14.1.1/iostream \
  /usr/include/c++/14.1.1/bits/requires_hosted.h \
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -140,32 +138,34 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/c++/14.1.1/bits/locale_facets.tcc \
  /usr/include/c++/14.1.1/bits/basic_ios.tcc \
  /usr/include/c++/14.1.1/bits/ostream.tcc /usr/include/c++/14.1.1/istream \
- /usr/include/c++/14.1.1/bits/istream.tcc /usr/include/c++/14.1.1/cstring \
- /usr/include/string.h /usr/include/strings.h \
- /usr/local/include/hiredis/hiredis.h /usr/local/include/hiredis/read.h \
- /usr/include/sys/time.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h /usr/local/include/hiredis/sds.h \
- /usr/local/include/hiredis/alloc.h /usr/include/c++/14.1.1/queue \
- /usr/include/c++/14.1.1/deque \
- /usr/include/c++/14.1.1/bits/stl_uninitialized.h \
- /usr/include/c++/14.1.1/bits/stl_deque.h \
- /usr/include/c++/14.1.1/bits/deque.tcc /usr/include/c++/14.1.1/vector \
- /usr/include/c++/14.1.1/bits/stl_vector.h \
- /usr/include/c++/14.1.1/bits/stl_bvector.h \
- /usr/include/c++/14.1.1/bits/vector.tcc \
+ /usr/include/c++/14.1.1/bits/istream.tcc /usr/include/arpa/inet.h \
+ /usr/include/netinet/in.h /usr/include/bits/stdint-uintn.h \
+ /usr/include/sys/socket.h /usr/include/bits/types/struct_iovec.h \
+ /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
+ /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
+ /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h /usr/include/asm/posix_types.h \
+ /usr/include/asm/posix_types_64.h /usr/include/asm-generic/posix_types.h \
+ /usr/include/asm/bitsperlong.h /usr/include/asm-generic/bitsperlong.h \
+ /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
+ /usr/include/bits/types/struct_osockaddr.h /usr/include/bits/in.h \
+ /usr/include/c++/14.1.1/cstring /usr/include/string.h \
+ /usr/include/strings.h /usr/include/c++/14.1.1/optional \
+ /usr/include/c++/14.1.1/bits/enable_special_members.h \
+ /usr/include/c++/14.1.1/stdlib.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
+ /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h \
+ /home/yunjian/chatroom/src/client/../include/back.hpp \
+ /usr/include/nlohmann/json.hpp /usr/include/c++/14.1.1/algorithm \
+ /usr/include/c++/14.1.1/bits/stl_algo.h \
+ /usr/include/c++/14.1.1/bits/algorithmfwd.h \
  /usr/include/c++/14.1.1/bits/stl_heap.h \
- /usr/include/c++/14.1.1/bits/stl_queue.h /usr/include/c++/14.1.1/thread \
- /usr/include/c++/14.1.1/bits/std_thread.h \
- /usr/include/c++/14.1.1/bits/unique_ptr.h \
- /usr/include/c++/14.1.1/bits/this_thread_sleep.h \
- /usr/include/c++/14.1.1/bits/chrono.h /usr/include/c++/14.1.1/ratio \
- /usr/include/c++/14.1.1/cstdint /usr/include/c++/14.1.1/limits \
- /usr/include/c++/14.1.1/ctime \
- /usr/include/c++/14.1.1/bits/parse_numbers.h \
- /usr/include/c++/14.1.1/mutex /usr/include/c++/14.1.1/bits/std_mutex.h \
- /usr/include/c++/14.1.1/bits/unique_lock.h \
+ /usr/include/c++/14.1.1/bits/uniform_int_dist.h \
+ /usr/include/c++/14.1.1/bits/stl_tempbuf.h \
+ /usr/include/c++/14.1.1/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/14.1.1/pstl/execution_defs.h \
  /usr/include/c++/14.1.1/functional \
  /usr/include/c++/14.1.1/bits/std_function.h \
  /usr/include/c++/14.1.1/unordered_map \
@@ -173,33 +173,27 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/c++/14.1.1/bits/hashtable.h \
  /usr/include/c++/14.1.1/bits/hashtable_policy.h \
  /usr/include/c++/14.1.1/ext/aligned_buffer.h \
- /usr/include/c++/14.1.1/bits/enable_special_members.h \
  /usr/include/c++/14.1.1/bits/node_handle.h \
- /usr/include/c++/14.1.1/bits/erase_if.h /usr/include/c++/14.1.1/array \
- /usr/include/c++/14.1.1/compare /usr/include/c++/14.1.1/future \
- /usr/include/c++/14.1.1/condition_variable \
- /usr/include/c++/14.1.1/bits/shared_ptr.h \
- /usr/include/c++/14.1.1/bits/shared_ptr_base.h \
- /usr/include/c++/14.1.1/bits/allocated_ptr.h \
- /usr/include/c++/14.1.1/ext/concurrence.h \
- /usr/include/c++/14.1.1/bits/atomic_base.h \
- /usr/include/c++/14.1.1/bits/atomic_lockfree_defines.h \
- /usr/include/c++/14.1.1/bits/atomic_futex.h \
- /usr/include/c++/14.1.1/atomic \
- /home/yunjian/chatroom/src/server/chuli/../../include/account.hpp \
- /usr/include/nlohmann/json.hpp /usr/include/c++/14.1.1/algorithm \
- /usr/include/c++/14.1.1/bits/stl_algo.h \
- /usr/include/c++/14.1.1/bits/algorithmfwd.h \
- /usr/include/c++/14.1.1/bits/uniform_int_dist.h \
- /usr/include/c++/14.1.1/bits/stl_tempbuf.h \
- /usr/include/c++/14.1.1/pstl/glue_algorithm_defs.h \
- /usr/include/c++/14.1.1/pstl/execution_defs.h \
- /usr/include/c++/14.1.1/iterator \
+ /usr/include/c++/14.1.1/bits/erase_if.h /usr/include/c++/14.1.1/vector \
+ /usr/include/c++/14.1.1/bits/stl_uninitialized.h \
+ /usr/include/c++/14.1.1/bits/stl_vector.h \
+ /usr/include/c++/14.1.1/bits/stl_bvector.h \
+ /usr/include/c++/14.1.1/bits/vector.tcc /usr/include/c++/14.1.1/array \
+ /usr/include/c++/14.1.1/compare /usr/include/c++/14.1.1/iterator \
  /usr/include/c++/14.1.1/bits/stream_iterator.h \
  /usr/include/c++/14.1.1/memory \
  /usr/include/c++/14.1.1/bits/stl_raw_storage_iter.h \
  /usr/include/c++/14.1.1/bits/align.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/stdint-least.h \
+ /usr/include/c++/14.1.1/bits/unique_ptr.h \
+ /usr/include/c++/14.1.1/bits/shared_ptr.h \
+ /usr/include/c++/14.1.1/bits/shared_ptr_base.h \
+ /usr/include/c++/14.1.1/bits/allocated_ptr.h \
+ /usr/include/c++/14.1.1/ext/concurrence.h \
  /usr/include/c++/14.1.1/bits/shared_ptr_atomic.h \
+ /usr/include/c++/14.1.1/bits/atomic_base.h \
+ /usr/include/c++/14.1.1/bits/atomic_lockfree_defines.h \
  /usr/include/c++/14.1.1/backward/auto_ptr.h \
  /usr/include/c++/14.1.1/pstl/glue_memory_defs.h \
  /usr/include/c++/14.1.1/utility \
@@ -221,7 +215,7 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h /usr/include/c++/14.1.1/bits/specfun.h \
- /usr/include/c++/14.1.1/tr1/gamma.tcc \
+ /usr/include/c++/14.1.1/limits /usr/include/c++/14.1.1/tr1/gamma.tcc \
  /usr/include/c++/14.1.1/tr1/special_function_util.h \
  /usr/include/c++/14.1.1/tr1/bessel_function.tcc \
  /usr/include/c++/14.1.1/tr1/beta_function.tcc \
@@ -243,7 +237,7 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/c++/14.1.1/bits/mask_array.h \
  /usr/include/c++/14.1.1/bits/indirect_array.h \
  /usr/include/nlohmann/detail/exceptions.hpp \
- /usr/include/nlohmann/detail/value_t.hpp \
+ /usr/include/nlohmann/detail/value_t.hpp /usr/include/c++/14.1.1/cstdint \
  /usr/include/nlohmann/detail/macro_scope.hpp \
  /usr/include/nlohmann/detail/meta/detected.hpp \
  /usr/include/nlohmann/detail/meta/void_t.hpp \
@@ -261,6 +255,9 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/nlohmann/detail/meta/identity_tag.hpp \
  /usr/include/nlohmann/detail/meta/std_fs.hpp \
  /usr/include/c++/14.1.1/filesystem /usr/include/c++/14.1.1/bits/fs_fwd.h \
+ /usr/include/c++/14.1.1/bits/chrono.h /usr/include/c++/14.1.1/ratio \
+ /usr/include/c++/14.1.1/ctime \
+ /usr/include/c++/14.1.1/bits/parse_numbers.h \
  /usr/include/c++/14.1.1/bits/fs_path.h /usr/include/c++/14.1.1/locale \
  /usr/include/c++/14.1.1/bits/locale_facets_nonio.h \
  /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/time_members.h \
@@ -300,14 +297,19 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/nlohmann/ordered_map.hpp /usr/include/c++/14.1.1/any \
  /usr/include/nlohmann/detail/macro_unscope.hpp \
  /usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
- /home/yunjian/chatroom/src/server/chuli/../../include/back.hpp \
- /home/yunjian/chatroom/src/server/chuli/../../include/back.hpp \
- /usr/include/sys/socket.h /usr/include/bits/types/struct_iovec.h \
- /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
- /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
- /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
- /usr/include/linux/stddef.h /usr/include/asm/posix_types.h \
- /usr/include/asm/posix_types_64.h /usr/include/asm-generic/posix_types.h \
- /usr/include/asm/bitsperlong.h /usr/include/asm-generic/bitsperlong.h \
- /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
- /usr/include/bits/types/struct_osockaddr.h
+ /home/yunjian/chatroom/src/client/ui/ui.hpp \
+ /home/yunjian/chatroom/src/client/ui/../../include/account.hpp \
+ /home/yunjian/chatroom/src/client/ui/../../include/back.hpp \
+ /home/yunjian/chatroom/src/client/ui/../../include/back.hpp \
+ /usr/include/c++/14.1.1/queue /usr/include/c++/14.1.1/deque \
+ /usr/include/c++/14.1.1/bits/stl_deque.h \
+ /usr/include/c++/14.1.1/bits/deque.tcc \
+ /usr/include/c++/14.1.1/bits/stl_queue.h /usr/include/c++/14.1.1/thread \
+ /usr/include/c++/14.1.1/bits/std_thread.h \
+ /usr/include/c++/14.1.1/bits/this_thread_sleep.h \
+ /usr/include/c++/14.1.1/future /usr/include/c++/14.1.1/mutex \
+ /usr/include/c++/14.1.1/bits/std_mutex.h \
+ /usr/include/c++/14.1.1/bits/unique_lock.h \
+ /usr/include/c++/14.1.1/condition_variable \
+ /usr/include/c++/14.1.1/bits/atomic_futex.h \
+ /usr/include/c++/14.1.1/atomic

@@ -81,7 +81,8 @@
     "valarray": "cpp",
     "bitset": "cpp",
     "csignal": "cpp",
-    "*.ipp": "cpp"
+    "*.ipp": "cpp",
+    "queue": "cpp"
   },
-  "cmake.sourceDirectory": "/home/yunjian/chatroom/src/server/build/_deps/json-subbuild"
+  "cmake.sourceDirectory": "/home/yunjian/chatroom/src/client"
 }
