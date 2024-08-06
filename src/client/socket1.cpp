@@ -36,11 +36,11 @@ void Socket::user_run() {
             apply_FriendList();
         } else if (choice == "7") { // 查看群聊申请
             apply_GroupList();
-        } else if (choice == "8") {
+        } else if (choice == "8") { // 添加群聊
             addGroup();
         } else if (choice == "9") { // 创建群聊
             createGroup();
-        } else if (choice == "10") {
+        } else if (choice == "10") { // 查看聊天记录
             showChatRecord();
         } else if (choice == "11") { // 注销账号
             if (cancel()) {
@@ -63,6 +63,16 @@ void Socket::showSelfInfo() // 查看自己信息1
     std::cout << " 用户类型: " << "普通用户" << std::endl;
     std::cout << " 用户fd : " << this->client_fd << std::endl;
     std::cout << std::endl;
+    std::cout << "---------------------------------" << std::endl;
+    std::cout << "是否姓名(y/N)" << std::endl;
+    std::string choice;
+    std::cin >> choice;
+    if (choice == "y" || choice == "Y") {
+        std::cout << "请输入新的姓名" << std::endl;
+        std::string new_name;
+        std::cin >> new_name;
+        send_change_name(new_name); // 发送更新信息
+    }
 }
 
 void Socket::queryUser() { // 查询用户2
@@ -79,6 +89,8 @@ void Socket::queryUser() { // 查询用户2
 
 void Socket::showFriendList() // 查看好友列表3
 {
+    // 直接发请求看
+    send_json_friend_list();
 }
 void Socket::showGroupList() // 查看群聊列表4
 {
@@ -102,11 +114,11 @@ void Socket::addFriend() // 添加好友5
     send_string(json.dump()); // 发送添加好友请求
     // 查询用户
 
-    // {
-    //     std::unique_lock<std::mutex> lock(mtx);
-    //     cv.wait(lock, [this] { return this->result_ready; });
-    //     this->result_ready = false;
-    // } // 处理结果
+    {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, [this] { return this->result_ready; });
+        this->result_ready = false;
+    } // 处理结果
 }
 void Socket::addGroup() // 添加群聊6
 {
@@ -135,12 +147,14 @@ bool Socket::cancel() // 注销账号9
 
 //
 
-void Socket::change_name() {
-    std::string name = change_name_ui();
+void Socket::send_change_name(std::string name) {
     this->account.name = name; // 修改用户名
     nlohmann::json json;
     json["mode"] = CHANGE_NAME;
     json["name"] = name;
+    json["id"] = account.id;
+    account.name = name;
+    send_string(json.dump()); // 发送修改信息
 }
 // 接受函数
 std::string Socket::receive_message() {
@@ -166,6 +180,7 @@ std::string Socket::receive_message() {
 
 void Socket::receive_json() {
     while (true) {
+        printf("dsklfnhljksdjhflkdsjkf\n");
         std::string message = receive_message();
         // if (message.empty()) {
         //     std::cout << "Connection closed by server" << std::endl;
@@ -189,6 +204,8 @@ void Socket::receive_josn_user(std::string message) {
         this->print_friend_add_2(message);
     } else if (mode == FRIEND_APPLY_LIST) {
         this->print_friend_apply_list(message);
+    } else if (mode == FRIEND_LIST) {
+        this->print_friend_list(message);
     }
 }
 //
@@ -242,41 +259,89 @@ void Socket::print_user_qu(std::string message) {
 }
 
 void Socket::print_friend_apply_list(std::string message) {
-    //是因为json把\" 转义成了" 所以要转义回来
-    try{
-    nlohmann::json json = nlohmann::json::parse(message);
-    std::string frr = json["apply_list"];
-    nlohmann::json friends = nlohmann::json::parse(frr);
-    int i = 1;
-    std::cout << "好友申请列表" << std::endl;
-     for (const auto &friend_json : friends) {
-         std::string id = friend_json["id"];
-         std::string name = friend_json["name"];
-         std::cout << "(" << i++ << ")" << " 申请人id: " << id << " 申请人名字: " << name << std::endl;
-     }
-    std::cout << "请输入要处理的好友序号" << std::endl;
-    std::string choice;
-    std::cin >> choice;
-    //这里处理
-    if (std::stoi(choice) >= 1 && std::stoi(choice) <= friends.size()) {
-        std::string id = friends[std::stoi(choice) - 1]["id"];
-        std::string name = friends[std::stoi(choice) - 1]["name"];
-        std::cout << "请输入要处理的方式 1.同意 2.拒绝" << std::endl;
-        std::string choice2;
-        std::cin >> choice2;
-        if (choice2 == "1") {
-            std::cout << "添加好友成功" << std::endl;
-            // 从数据库里面删掉
-            // 且加入好友数据库
-        } else {
-            std::cout << "拒绝添加好友" << std::endl;
-            // 从数据库里面删掉
+    try {
+        nlohmann::json json = nlohmann::json::parse(message);
+        nlohmann::json array = json["apply_list"];
+        std::vector<std::string> vec;
+        for (const auto &item : array) {
+            // std::cout << "申请人id: " << item["id"] << " 申请人名字: " << item["name"] << std::endl;
+            // std::cout << item << std::endl; // 这里处理
+            vec.push_back(item);
         }
-    } else {
-        std::cout << "输入错误" << std::endl;
-    }}catch (const std::exception &e) {
+        this->print_friend_apply_list2(vec);
+    } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
     }
+}
+void Socket::print_friend_apply_list2(std::vector<std::string> vec) {
+    try {
+        int i = 1;
+        for (const auto &item : vec) {
+            nlohmann::json json = nlohmann::json::parse(item);
+            std::string id = json["id"];
+            std::string name = json["name"];
+
+            std::cout << "(" << i++ << ")" << "申请人id: " << id << " 申请人名字: " << name << std::endl;
+            std::cout << "申请消息：" << json["msg"] << std::endl; // 这里处理
+            // std::cout << "申请人id: " << item["id"] << " 申请人名字: " << item["name"] << std::endl;
+            //   std::cout << item << std::endl; // 这里处理
+        }
+        // 这里加锁
+        if (vec.empty()) {
+            std::cout << "你还没有申请哦～" << std::endl;
+            return;
+        }
+        std::cout << "请输入要处理的序号" << std::endl;
+        std::string choice;
+        std::cin >> choice;
+        // 这里处理
+
+        if (std::stoi(choice) >= 1 && std::stoi(choice) <= vec.size()) {
+            std::string str = vec[std::stoi(choice) - 1];
+            nlohmann::json json = nlohmann::json::parse(str);
+            std::string id = json["id"];
+            // std::string name = vec[std::stoi(choice) - 1];
+            std::cout << "请输入要处理的方式 1.同意 2.拒绝" << std::endl;
+            std::string choice2;
+            std::cin >> choice2;
+            if (choice2 == "1") {
+                std::cout << "添加好友成功" << std::endl;
+                // 从数据库里面删掉 发东西
+                // 且加入好友数据库
+            } else if (choice2 == "2") {
+                // 从数据库里面删掉
+                std::cout << "拒绝添加好友" << std::endl;
+            } else {
+                std::cout << "输入错误" << std::endl;
+                return;
+            }
+            send_json_friend_apply(this->account.id, id, choice2);
+        } else {
+            std::cout << "输入错误" << std::endl;
+        }
+        {
+            std::unique_lock<std::mutex> lock(mtx);
+            this->result_ready = true;
+            cv.notify_one();
+        }
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+std::string Socket::send_json_friend_apply(std::string id, std::string friend_id, std::string chioce) {
+    try {
+        nlohmann::json json;
+        json["mode"] = FRIEND_APPLY;
+        json["id"] = id;
+        json["friend_id"] = friend_id;
+        json["chioce"] = chioce;
+        this->send_string(json.dump());
+        return json.dump();
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return "";
 }
 
 // 发送询问 send_json_user_que
@@ -300,6 +365,11 @@ void Socket::apply_FriendList() {
         json["mode"] = FRIEND_APPLY_LIST;
         json["id"] = this->account.id;
         send_string(json.dump());
+        {
+            std::unique_lock<std::mutex> lock(mtx);
+            cv.wait(lock, [this] { return this->result_ready; });
+            this->result_ready = false;
+        }
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
     }
@@ -312,20 +382,22 @@ void Socket::apply_GroupList() {
         std::cerr << e.what() << '\n';
     }
 }
-// std::string Socket::send_string(std::string chuan) {
-//     try {
-//         ssize_t lee = send(this->fd, chuan.c_str(), chuan.size(), 0);
-//         if (lee == -1) {
-//             throw std::runtime_error("Error sending data");
-//         } else if (lee < chuan.size()) {
-//             throw std::runtime_error("Error sending data");
-//             // 传大东西这里用多次传那种吧
-//         } else {
-//             return chuan; // 成功
-//         }
-//     } catch (const std::exception &e) {
-//         std::cerr << e.what() << '\n';
-//         return "";
-//     }
-//     return "";
-// }
+
+std::string Socket::send_json_friend_list() {
+    try {
+        nlohmann::json json;
+        json["mode"] = FRIEND_LIST;
+        json["id"] = this->account.id;
+        // std::cout << "____________________________dasd_______dasd__"<< std::endl;
+        send_string(json.dump());
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+void Socket::print_friend_list(std ::string message) {
+    try {
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+}

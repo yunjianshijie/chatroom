@@ -1,4 +1,4 @@
-#define HAND  8086
+#define HAND  8000
 #define EXIT -11
 #define SUCCESS 0
 #define FAILURE -1
@@ -47,10 +47,21 @@
 #define  DELETE_SELF2 18
 
 
+
+
 //用户查询
 #define  USER_QUERY  19
 //好友申请列表
 #define FRIEND_APPLY_LIST 20
+//处理好友申请
+#define FRIEND_APPLY 21
+//查看好友列表
+#define FRIEND_LIST 22
+
+
+
+
+//群组
 
 #define MAX 100
 

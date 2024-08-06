@@ -11,6 +11,17 @@ Redis::Redis() { //
             throw std::runtime_error("连接redis服务器失败\n");
         }
         std::cout << "连接redis服务器成功" << std::endl;
+        // 连接后将所有用户改成fd -1
+        redisReply *reply = (redisReply *)redisCommand(rc, "HSET account:* fd -1");
+        std::cout << "所有用户fd置为-1" << std::endl;
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        if (reply->type != REDIS_REPLY_INTEGER) {
+            freeReplyObject(reply);
+            throw std::runtime_error("redisCommand error");
+        }
+        freeReplyObject(reply);
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
     }
@@ -39,20 +50,23 @@ std::string Redis::get_new_id() { // 获取新的id
 std::string Redis::setAccount(Account &account) { // 设置账号
     try {
         std::string new_id = get_new_id(); // 获取新的id
+        printf("new_id:%s\n", new_id.c_str());
+
         std::string key = "account:" + new_id;
-        std::string com = "HMSET " + key + " name " + account.name + " pass取账号 返回账号jsword " + account.get_password() + " answer " + account.get_answer() + " question " + account.question + " fd  -1 ";
-        redisReply *reply = (redisReply *)redisCommand(rc, com.c_str());
+        //
+        std::string com = "HSET " + key + " name " + account.name + " password " + account.get_password() + " answer " + account.get_answer() + " question " + account.question + " fd  -1 ";
+        std::cout << com << std::endl;
+        //
+        redisReply *reply = (redisReply *)redisCommand(rc, "HSET %s name %s password %s answer %s question %s fd -1", key.c_str(), account.name.c_str(), account.get_password().c_str(), account.get_answer().c_str(), account.question.c_str());
+        //
         if (reply == nullptr) {
-            throw std::runtime_error("redisCommand error");
-        }
-        if (reply->type != REDIS_REPLY_STATUS) {
+            throw std::runtime_error("321312redisCommand error");
+        } 
+        if (reply->type ==  REDIS_REPLY_ERROR) {
             freeReplyObject(reply);
-            throw std::runtime_error("redisCommand error");
+            throw std::runtime_error("12212redisCommand error");
         }
-        if (strcmp(reply->str, "OK") != 0) {
-            freeReplyObject(reply);
-            throw std::runtime_error("redisCommand error");
-        }
+        freeReplyObject(reply);
         return new_id;
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
@@ -426,9 +440,11 @@ void Redis::apply_friend(std::string id, std::string friend_id, std::string frie
         std::cerr << e.what() << '\n';
     }
 }
-//获得好友申请列表
+// 获得好友申请列表
 std::string Redis::get_apply_friend(std::string id) {
     try {
+        //
+
         std::string cmd = "SMEMBERS apply:" + id;
         redisReply *reply = (redisReply *)redisCommand(this->rc, cmd.c_str());
         if (reply == nullptr) {
@@ -440,10 +456,14 @@ std::string Redis::get_apply_friend(std::string id) {
         }
         nlohmann::json json_array;
         json_array["mode"] = FRIEND_APPLY_LIST;
+        std::vector<std::string> apply_list;
+
         for (int i = 0; i < reply->elements; i++) {
-            json_array["apply_list"].push_back(reply->element[0]->str);
-            std::cout << reply->element[i]->str << std::endl;
+            // json_array["apply_list"].push_back(reply->element[0]->str);
+            // std::cout << reply->element[i]->str << std::endl;
+            apply_list.push_back(reply->element[i]->str);
         }
+        json_array["apply_list"] = apply_list;
         freeReplyObject(reply);
         std::cout << json_array.dump() << std::endl;
         return json_array.dump();
@@ -452,10 +472,87 @@ std::string Redis::get_apply_friend(std::string id) {
         return "null";
     }
 }
-
-void Redis::friend_list(std::string id, std::string friend_id){
-
+// 集合
+void Redis::add_friend_list(std::string id, std::string friend_id) {
+    try {
+        std::string cmd = "SADD friend:" + id + " " + friend_id;
+        redisReply *reply = (redisReply *)redisCommand(this->rc, cmd.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("11111redisCommand error");
+        }
+        if (reply->type != REDIS_REPLY_STATUS) {
+            freeReplyObject(reply);
+            throw std::runtime_error("1111redisCommand error");
+        }
+        if (strcmp(reply->str, "OK") != 0) {
+            freeReplyObject(reply);
+            throw std::runtime_error("1redisCommand error");
+        }
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
 }
+void Redis::del_apply_friend(std::string id, std::string friend_id) {
+    try {
+        std::string cmd = " SMEMBERS  apply:" + id;
+        redisReply *reply = (redisReply *)redisCommand(this->rc, cmd.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        if (reply->type != REDIS_REPLY_ARRAY) {
+            freeReplyObject(reply);
+            throw std::runtime_error("redisCommand error");
+        }
+        if (reply->elements == 0) {
+            freeReplyObject(reply);
+            return;
+        }
+        printf("elements:%d\n", reply->elements);
+        for (int i = 0; i < reply->elements; i++) {
+            nlohmann::json json_array = nlohmann::json::parse(reply->element[i]->str);
+            if (json_array["id"] == friend_id) {
+                cmd = "SREM apply:" + id + " " + reply->element[i]->str;
+                reply = (redisReply *)redisCommand(this->rc, cmd.c_str());
+                if (reply == nullptr) {
+                    throw std::runtime_error("redisCommand error");
+                }
+                if (reply->type != REDIS_REPLY_STATUS) {
+                    freeReplyObject(reply);
+                    throw std::runtime_error("redisCommand error");
+                }
+            }
+        }
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+std::string Redis::get_friend_list(std::string id) {
+    try {
+        std::string cmd = "SMEMBERS friend:" + id;
+        redisReply *reply = (redisReply *)redisCommand(this->rc, cmd.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        if (reply->type != REDIS_REPLY_ARRAY) {
+            freeReplyObject(reply);
+            throw std::runtime_error("redisCommand error");
+        }
+        std::vector<std::string> friend_list;
+        nlohmann::json json_array;
+        for (int i = 0; i < reply->elements; i++) {
+            std::string friend_id = reply->element[i]->str;
+            json_getUserInfo((friend_id));
+        }
+        json_array["friend_list"] = friend_list;
+        json_array["mode"] = FRIEND_LIST;
+        return json_array.dump();
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return "";
+}
+
 // Account Redis::isAccountExist(std::string id) { //判断账号是否存在
 //     Account account;
 //     try {

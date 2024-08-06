@@ -109,7 +109,7 @@ void Socket::socket_do() {
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清理缓存区
                 // 要接收服务器返回的id
                 std::string id = this->receive_json_usr_id();
-                if (!id.empty()) {   // 如果id不为空
+                if (!(id.empty() || id== "error")  ) {   // 如果id不为空
                     remember_id(id); // 记住id
                 } else {
                     std::cout << "注册失败" << std::endl;

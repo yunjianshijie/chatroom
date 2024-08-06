@@ -65,19 +65,30 @@ public:
     ~Socket() {
         close(client_fd); // 关闭客户端的ip
     }
-    void socket_do();                                  // 处理主要逻辑
-    bool send_string(std::string chuan);               // 发送数据
-    std::string receive_string();                      // 接受数据
-    bool send_json_usr_register(Account &account);     // 发送注册json数据
-    std::string receive_json_usr_id();                 // 接收注册json数据
-    bool remember_id(std::string id);                  // 记住id
-    Account receive_json_usr_login();                  // 接收登录json数据
-    std::string send_json_usr_login(Account &account); // 发送登录json数据
-    std::string send_json_usr_exit();                  // 退出登录json数据
+    // 处理主要逻辑
+    void socket_do();
+    // 发送数据
+    bool send_string(std::string chuan);
+    // 接受数据
+    std::string receive_string();
+    // 发送注册json数据
+    bool send_json_usr_register(Account &account);
+    // 接收注册json数据
+    std::string receive_json_usr_id();
+    // 记住id
+    bool remember_id(std::string id);
+    // 接收登录json数据
+    Account receive_json_usr_login();
+    // 发送登录json数据
+    std::string send_json_usr_login(Account &account);
+    // 退出登录json数据
+    std::string send_json_usr_exit();
     // 登录成功发送
     std::string send_josn_login_success();
-    bool error_string(std::string str); // 错误信息
-    bool change_pass(Account &account); // 修改密码
+    // 错误信息
+    bool error_string(std::string str);
+    // 修改密码
+    bool change_pass(Account &account);
 
     // 结束在Usr
     // 进入用户界面
@@ -106,19 +117,26 @@ public:
     bool cancel();
     // 好友
     std::string send_json_user_que(std::string id); // 发送添加好友请求
-
-    // std::string send_string(std::string chuan); // 发送字符串
     // 修改昵称
-    void change_name();
+    void send_change_name(std::string name);
+    //
+    std::string send_json_friend_list();
     // 接受消息
     std::string receive_message();
     // 线程接收消息
-    void receive_json();                         //
-    void receive_josn_user(std::string massage); //
+    void receive_json();
+    //
+    void receive_josn_user(std::string massage);
+
+    // 发送
+    // 发送好友同样消息
+    std::string send_json_friend_apply(std::string id, std::string friend_id, std::string chioce);
 
     // 打印用户信息
     void print_user_qu(std::string massage);
     void print_friend_add(std::string message);
     void print_friend_add_2(std::string message);
-    void print_friend_apply_list(std::string message); // 打印好友申请列表
+    void print_friend_apply_list(std::string message);           // 打印好友申请列表
+    void print_friend_apply_list2(std::vector<std::string> vec); // 打印好友申请列表2
+    void print_friend_list(std::string message);                 // 打印好友列表
 };

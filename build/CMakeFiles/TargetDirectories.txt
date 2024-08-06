@@ -1,3 +1,0 @@
-/home/yunjian/chatroom/build/CMakeFiles/json-populate.dir
-/home/yunjian/chatroom/build/CMakeFiles/edit_cache.dir
-/home/yunjian/chatroom/build/CMakeFiles/rebuild_cache.dir

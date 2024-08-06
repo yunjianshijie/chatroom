@@ -70,6 +70,9 @@ public:
     //获取好友申请列表
     std::string get_apply_friend(std::string id);
     //每个人好友列表
-    void friend_list(std::string id, std::string friend_id);
-
+    void add_friend_list(std::string id, std::string friend_id);
+    //删除好友申请列表
+    void del_apply_friend(std::string id,std::string  friend_id);
+    //获取好友列表
+    std::string get_friend_list(std::string id);
 };

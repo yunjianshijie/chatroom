@@ -8,7 +8,11 @@ std::map<int, func> fun_map{
     {LOGIN_SUCCESS, fun_login_success},
     {USER_QUERY, fun_user_query},
     {FRIEND_ADD, fun_add_friend},
-    {FRIEND_APPLY_LIST, fun_apply_friend}};
+    {FRIEND_APPLY_LIST, fun_apply_friend},
+    {FRIEND_APPLY, fun_friend_apply_result},
+    {CHANGE_NAME, fun_change_name},
+    {FRIEND_LIST, fun_friend_list},
+};
 
 // 这里是处理主函数
 // 这里默认buffer为 josn
@@ -83,7 +87,16 @@ std::string fun_login_success(nlohmann::json &j, Redis &redis) {
     return "";
 }
 
-std::string josn_str_login(std::string y_n, Account account) { // 登录
+std::string fun_change_name(nlohmann::json &j, Redis &redis) {
+    std::string id = j["id"];
+    std::string name = j["name"];
+    std::string com = "HSET account:" + id + " name " + name;
+    redis.redis_command(com);
+    return "";
+}
+
+std::string
+josn_str_login(std::string y_n, Account account) { // 登录
     nlohmann::json j;
     std::cout << "dsfjdsklfsd" << std::endl;
     j["mode"] = LOGIN;
@@ -198,14 +211,36 @@ std::string fun_add_friend(nlohmann::json &j, Redis &redis) {
     //    return redis.json_addFriend(id, friend_id);
     return j1.dump();
 }
+std::string fun_friend_apply_result(nlohmann::json &j, Redis &redis) {
+    try {
+        std::string id = j["id"];
+        std::string friend_id = j["friend_id"];
+        std::string chioce = j["chioce"];
+        if (chioce == "1") {
+            // 加好友
+            redis.add_friend_list(id, friend_id);
+            redis.add_friend_list(friend_id, id);
+        }
+        // 删申请
+        redis.del_apply_friend(id, friend_id);
+        return "";
+
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return "";
+}
 
 // 查看好友申请列表
 std::string fun_apply_friend(nlohmann::json &j, Redis &redis) {
     std::string id = j["id"];
     return redis.get_apply_friend(id);
-    }
+}
 //
-//
+std::string fun_friend_list(nlohmann::json &j, Redis &redis) {
+    std::string id = j["id"];
+    return redis.get_friend_list(id);
+}
 //
 std::string send_fd(int c_fd, std::string message) {
     try {

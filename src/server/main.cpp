@@ -50,15 +50,25 @@ int main() {
                 }
                 // redis.set_offline(std::to_string(client_fd)); // 设置为离线
                 client_fds.push_back(client_fd);
+
             } else {
                 // 有数据到达
+
+                // //将fd摘出树、
+                // struct epoll_event ev;
+                // ev.events = EPOLLIN || EPOLLET;
+                // ev.data.fd = events[i].data.fd;
+                // if(epoll_ctl(epoll_fd, EPOLL_CTL_DEL, events[i].data.fd, &ev) < 0){
+                //     std::cerr << "Failed to remove client socket from epoll" << std::endl;
+                //     continue;
+                // }
                 char buffer[1024];
                 memset(buffer, 0, 1024);
                 ssize_t bytes_read = read(events[i].data.fd, buffer, 1024 - 1);
                 if (bytes_read > 0) {
                     std::cout << "来自客户端 fd " << events[i].data.fd << "  发来消息 " << ": " << buffer << std::endl;
-                    // 现在收到传送的消息
-                    // 处理消息
+                //现在收到传送的消息
+               // 处理消息
                     std::string ret = fanhui(buffer, redis, events[i].data.fd);
 
                     if (ret == "-1") {
@@ -66,7 +76,7 @@ int main() {
                         continue;
                     }
                     send(events[i].data.fd, ret.c_str(), 1024, 0); // 发送消息
-                    
+
                     std::cout << "发送 给 fd" << events[i].data.fd << " :" << ret << std::endl;
                     // 发给客户端指令
                     // 这个
@@ -80,8 +90,9 @@ int main() {
                     close(events[i].data.fd);
                     //   // client_fds.erase(std::remove(client_fds.begin(), client_fds.end(), events[i].data.fd), client_fds.end());
                     //   // 删除client_fds中的元素
-                    client_fds.erase(std::remove(client_fds.begin(), client_fds.end(), events[i].data.fd), client_fds.end());
-                } else {
+                    //     client_fds.erase(std::remove(client_fds.begin(), client_fds.end(), events[i].data.fd), client_fds.end());
+                }
+                else {
                     std::cerr << "Failed to read from client socket" << std::endl;
                     if (epoll_ctl(epoll_fd, EPOLL_CTL_DEL, events[i].data.fd, nullptr) < 0) {
                         std::cerr << "Failed to remove client socket from epoll" << std::endl;
@@ -94,31 +105,9 @@ int main() {
     }
 
     return 0;
-    //
-    //    int cfd[40];
-    //  int count1 = 0;
-
-    //  cfd[count1] = a.Connect_clientfd();
-
-    //  if (cfd[count1] != -1) {
-    //      std::cout << "连接成功。 客户端文件描述符为 " << cfd[count1++] << " 。" << std::endl;
-    //  } else {
-    //      std::cout << "连接失败。" << std::endl;
-    //      // break;
-    //  }
-    //  //
-    //  while (1) {
-    //      std::string str = a.get_new(cfd[count1 - 1]);
-    //      if (str == "") {
-    //          break;
-    //      }
-    //      std::cout << "客户端说" << str << std::endl;
-    //      a.push_new(cfd[count1 - 1], "hello~");
-    //  }
-
-    //  sleep(30);
-    // 解析
-    // 分配线程处理
-    // 返回有的值
-    // return 0;
 }
+
+
+// void work(){
+
+// }

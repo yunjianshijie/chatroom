@@ -4,7 +4,7 @@
 typedef std::string (*func)(nlohmann::json &j, Redis &redis);
 // std::map<int, func> fun_map;
 std::string numToStr(int num);
-std::string fanhui(char *buffer, Redis &redis,int c_fd);
+std::string fanhui(char *buffer, Redis &redis, int c_fd);
 // 登录josn 字符串
 std::string josn_str_login(std::string id, Account account);
 // 注册josn 字符串
@@ -20,13 +20,17 @@ std::string fun_bigin(nlohmann::json &j, Redis &redis);
 std::string fun_login(nlohmann::json &j, Redis &redis);
 std::string fun_register(nlohmann::json &j, Redis &redis);
 std::string fun_login_success(nlohmann::json &j, Redis &redis);
-//处理退出
+// 处理退出
 std::string fun_exit(nlohmann::json &j, Redis &redis);
-//用户查询
+// 用户查询
 std::string fun_user_query(nlohmann::json &j, Redis &redis);
-//添加好友
+// 添加好友
 std::string fun_add_friend(nlohmann::json &j, Redis &redis);
-//
-//发送 
+std::string fun_friend_apply_result(nlohmann::json &j, Redis &redis);
+//改名 
+std::string fun_change_name(nlohmann::json &j, Redis &redis);
+// 发送
 std::string send_fd(int c_fd, std::string message);
 std::string fun_apply_friend(nlohmann::json &j, Redis &redis);
+// 获取好友列表
+std::string fun_friend_list(nlohmann::json &j, Redis &redis);
