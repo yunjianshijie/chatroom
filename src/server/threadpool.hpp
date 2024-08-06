@@ -9,7 +9,7 @@
 #include <cstddef>
 
 // void receive_message(Socket &client);
-void process_messages(Socket &client);
+// void process_messages(Socket &client);
 class ThreadPool {
 public:
     ThreadPool(int num_threads); // 多少个线程
@@ -68,5 +68,3 @@ void ThreadPool::worker() {
         task(); // 执行任务
     }
 }
-
-

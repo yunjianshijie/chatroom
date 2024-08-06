@@ -1024,6 +1024,7 @@ CMakeFiles/server.dir/main.cpp.o: /home/yunjian/chatroom/src/server/main.cpp \
   /home/yunjian/chatroom/src/server/chuli/redis.hpp \
   /home/yunjian/chatroom/src/server/epoll.hpp \
   /home/yunjian/chatroom/src/server/socket.hpp \
+  /home/yunjian/chatroom/src/server/threadpool.hpp \
   /usr/include/alloca.h \
   /usr/include/arpa/inet.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -1743,6 +1744,8 @@ CMakeFiles/server.dir/socket.cpp.o: /home/yunjian/chatroom/src/server/socket.cpp
 /usr/lib/gcc/x86_64-pc-linux-gnu/14.1.1/include/stdint.h:
 
 /usr/include/nlohmann/detail/macro_unscope.hpp:
+
+/home/yunjian/chatroom/src/server/threadpool.hpp:
 
 /usr/include/nlohmann/detail/macro_scope.hpp:
 

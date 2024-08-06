@@ -182,10 +182,7 @@ void Socket::receive_json() {
     while (true) {
         printf("dsklfnhljksdjhflkdsjkf\n");
         std::string message = receive_message();
-        // if (message.empty()) {
-        //     std::cout << "Connection closed by server" << std::endl;
-        //     break;
-        //     }
+
         std::cout << "收到消息" << message << std::endl;
         if (!message.empty() && message != "error" && message != "") {
             this->receive_josn_user(message); // 处理json

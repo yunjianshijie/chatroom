@@ -61,8 +61,8 @@ std::string Redis::setAccount(Account &account) { // 设置账号
         //
         if (reply == nullptr) {
             throw std::runtime_error("321312redisCommand error");
-        } 
-        if (reply->type ==  REDIS_REPLY_ERROR) {
+        }
+        if (reply->type == REDIS_REPLY_ERROR) {
             freeReplyObject(reply);
             throw std::runtime_error("12212redisCommand error");
         }
@@ -288,10 +288,10 @@ std::string Redis::state_offline(std::string id) { // 离线是 将fd置为-1
         if (reply == nullptr) {
             throw std::runtime_error("77redisCommand error");
         }
-        if (reply->type != REDIS_REPLY_STATUS) {
-            freeReplyObject(reply);
-            throw std::runtime_error("88redisCommand error");
-        }
+        // if (reply->type != REDIS_REPLY_STATUS) {
+        //     freeReplyObject(reply);
+        //     throw std::runtime_error("88redisCommand error");
+        // }
         if (strcmp(reply->str, "OK") != 0) {
             freeReplyObject(reply);
             throw std::runtime_error("99redisCommand error");
@@ -386,7 +386,7 @@ std::string Redis::get_online(std::string fd) {
 
 void Redis::set_offline(std::string fd) {
     try {
-        // std::cout << 1111 << std::endl;
+        std::cout << 1111 << std::endl;
         std::string id = this->get_online(fd);
         if (id == "") {
             return;

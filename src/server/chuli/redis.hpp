@@ -60,7 +60,6 @@ public:
     std::string get_online(std::string id);
     //设置离线
     void set_offline(std::string fd);
-
     //
     //
     //好友设置，好友申请列表（待处理）

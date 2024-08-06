@@ -17,9 +17,9 @@ std::map<int, func> fun_map{
 // 这里是处理主函数
 // 这里默认buffer为 josn
 // 返回josn
-std::string fanhui(char *buffer, Redis &redis, int c_fd) {
-    std::cout << "buffer:" << buffer << std::endl;
-    std::string str(buffer);
+std::string fanhui(std::string str, Redis &redis, int c_fd) {
+    // std::cout << "buffer:" << buffer << std::endl;
+    // std::string str(buffer);
     // std::cout << "str:" << str << std::endl;
     nlohmann::json j = nlohmann::json::parse(str);
     // 创建类型

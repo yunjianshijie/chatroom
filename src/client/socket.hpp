@@ -89,7 +89,6 @@ public:
     bool error_string(std::string str);
     // 修改密码
     bool change_pass(Account &account);
-
     // 结束在Usr
     // 进入用户界面
     void user_run();

@@ -80,10 +80,7 @@ void Socket::socket_do() {
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //  清理缓存区
                 this->send_json_usr_login(account1);                                // 发送                                  // 发送json
                 account1.id = "-1";
-                account1 = this->receive_json_usr_login(); // 接收
-                //  if(this->buf != "")
-                //  {
-                // }
+                account1 = this->receive_json_usr_login(); // 接收json
                 std::cout << "account1.id =" << account1.id << std::endl;
                 if (account1.id == "-2") {
                     std::cout << "没有此账号" << std::endl;

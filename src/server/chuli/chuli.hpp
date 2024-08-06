@@ -4,7 +4,7 @@
 typedef std::string (*func)(nlohmann::json &j, Redis &redis);
 // std::map<int, func> fun_map;
 std::string numToStr(int num);
-std::string fanhui(char *buffer, Redis &redis, int c_fd);
+std::string fanhui(std::string str, Redis &redis, int c_fd);
 // 登录josn 字符串
 std::string josn_str_login(std::string id, Account account);
 // 注册josn 字符串

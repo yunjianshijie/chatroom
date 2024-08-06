@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/yunjian/chatroom/build",
+  "command": "/usr/bin/g++ -g -std=gnu++17 -o CMakeFiles/client.dir/main.cpp.o -c /home/yunjian/chatroom/src/client/main.cpp",
+  "file": "/home/yunjian/chatroom/src/client/main.cpp",
+  "output": "CMakeFiles/client.dir/main.cpp.o"
+},
+{
+  "directory": "/home/yunjian/chatroom/build",
+  "command": "/usr/bin/g++ -g -std=gnu++17 -o CMakeFiles/client.dir/ui/user_long.cpp.o -c /home/yunjian/chatroom/src/client/ui/user_long.cpp",
+  "file": "/home/yunjian/chatroom/src/client/ui/user_long.cpp",
+  "output": "CMakeFiles/client.dir/ui/user_long.cpp.o"
+},
+{
+  "directory": "/home/yunjian/chatroom/build",
+  "command": "/usr/bin/g++ -g -std=gnu++17 -o CMakeFiles/client.dir/socket.cpp.o -c /home/yunjian/chatroom/src/client/socket.cpp",
+  "file": "/home/yunjian/chatroom/src/client/socket.cpp",
+  "output": "CMakeFiles/client.dir/socket.cpp.o"
+},
+{
+  "directory": "/home/yunjian/chatroom/build",
+  "command": "/usr/bin/g++ -g -std=gnu++17 -o CMakeFiles/client.dir/socket1.cpp.o -c /home/yunjian/chatroom/src/client/socket1.cpp",
+  "file": "/home/yunjian/chatroom/src/client/socket1.cpp",
+  "output": "CMakeFiles/client.dir/socket1.cpp.o"
+}
+]
