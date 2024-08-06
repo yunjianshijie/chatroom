@@ -1053,6 +1053,8 @@ CMakeFiles/server.dir/main.cpp.o: /home/yunjian/chatroom/src/server/main.cpp \
   /usr/include/bits/environments.h \
   /usr/include/bits/epoll.h \
   /usr/include/bits/errno.h \
+  /usr/include/bits/fcntl-linux.h \
+  /usr/include/bits/fcntl.h \
   /usr/include/bits/floatn-common.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/flt-eval-method.h \
@@ -1082,6 +1084,7 @@ CMakeFiles/server.dir/main.cpp.o: /home/yunjian/chatroom/src/server/main.cpp \
   /usr/include/bits/sockaddr.h \
   /usr/include/bits/socket.h \
   /usr/include/bits/socket_type.h \
+  /usr/include/bits/stat.h \
   /usr/include/bits/stdint-intn.h \
   /usr/include/bits/stdint-least.h \
   /usr/include/bits/stdint-uintn.h \
@@ -1089,6 +1092,7 @@ CMakeFiles/server.dir/main.cpp.o: /home/yunjian/chatroom/src/server/main.cpp \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
+  /usr/include/bits/struct_stat.h \
   /usr/include/bits/thread-shared-types.h \
   /usr/include/bits/time.h \
   /usr/include/bits/time64.h \
@@ -1353,6 +1357,7 @@ CMakeFiles/server.dir/main.cpp.o: /home/yunjian/chatroom/src/server/main.cpp \
   /usr/include/ctype.h \
   /usr/include/endian.h \
   /usr/include/errno.h \
+  /usr/include/fcntl.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
   /usr/include/gnu/stubs-64.h \
@@ -1360,6 +1365,7 @@ CMakeFiles/server.dir/main.cpp.o: /home/yunjian/chatroom/src/server/main.cpp \
   /usr/include/libintl.h \
   /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
+  /usr/include/linux/falloc.h \
   /usr/include/linux/ioctl.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/stddef.h \
@@ -1669,7 +1675,15 @@ CMakeFiles/server.dir/socket.cpp.o: /home/yunjian/chatroom/src/server/socket.cpp
 
 /home/yunjian/chatroom/src/server/socket.cpp:
 
+/usr/include/fcntl.h:
+
 /usr/include/c++/14.1.1/stdlib.h:
+
+/usr/include/bits/stat.h:
+
+/usr/include/bits/fcntl.h:
+
+/usr/include/bits/fcntl-linux.h:
 
 /home/yunjian/chatroom/src/server/main.cpp:
 
@@ -1826,6 +1840,8 @@ CMakeFiles/server.dir/socket.cpp.o: /home/yunjian/chatroom/src/server/socket.cpp
 /usr/include/c++/14.1.1/utility:
 
 /usr/include/c++/14.1.1/type_traits:
+
+/usr/include/linux/falloc.h:
 
 /usr/include/bits/unistd_ext.h:
 
@@ -2456,6 +2472,8 @@ CMakeFiles/server.dir/socket.cpp.o: /home/yunjian/chatroom/src/server/socket.cpp
 /usr/include/c++/14.1.1/x86_64-pc-linux-gnu/bits/c++config.h:
 
 /usr/include/c++/14.1.1/bits/string_view.tcc:
+
+/usr/include/bits/struct_stat.h:
 
 /usr/include/c++/14.1.1/bits/unique_lock.h:
 

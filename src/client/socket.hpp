@@ -55,7 +55,9 @@ private:
     std::mutex mtx;
     std::condition_variable cv;
     bool result_ready = false;
-
+    int state ;
+    std::string message;
+    std::vector<std::string> message_vec;
 public:
     int server_fd;
     std::string buf;                 // 服务器传回来的信息
@@ -138,4 +140,12 @@ public:
     void print_friend_apply_list(std::string message);           // 打印好友申请列表
     void print_friend_apply_list2(std::vector<std::string> vec); // 打印好友申请列表2
     void print_friend_list(std::string message);                 // 打印好友列表
+    void print_friend_list2(std::vector<std::string> vec);
+
+
+    //私聊
+    void private_chat(std::string id,std::string friend_id);
+    
+    //群聊
+
 };

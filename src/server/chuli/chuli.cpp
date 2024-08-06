@@ -12,6 +12,7 @@ std::map<int, func> fun_map{
     {FRIEND_APPLY, fun_friend_apply_result},
     {CHANGE_NAME, fun_change_name},
     {FRIEND_LIST, fun_friend_list},
+ 
 };
 
 // 这里是处理主函数
@@ -83,6 +84,7 @@ std::string fun_login_success(nlohmann::json &j, Redis &redis) {
     // 写进redis
     std::cout << "登录成功" << std::endl;
     redis.set_online(id, numToStr(fd));
+    std::cout << "com:" << com << std::endl;
     redis.redis_command(com);
     return "";
 }
@@ -95,8 +97,7 @@ std::string fun_change_name(nlohmann::json &j, Redis &redis) {
     return "";
 }
 
-std::string
-josn_str_login(std::string y_n, Account account) { // 登录
+std::string josn_str_login(std::string y_n, Account account) { // 登录
     nlohmann::json j;
     std::cout << "dsfjdsklfsd" << std::endl;
     j["mode"] = LOGIN;

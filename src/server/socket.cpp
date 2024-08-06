@@ -1,6 +1,6 @@
 #include "socket.hpp"
 // // 连接客户端
-Socket_con::Socket_con() // 服务器启动
+Socket_con::Socket_con(int port,std::string ip) // 服务器启动
 {
     lfd = socket(AF_INET, SOCK_STREAM, 0);
     if (lfd < 0) {
@@ -10,10 +10,9 @@ Socket_con::Socket_con() // 服务器启动
     struct sockaddr_in addr;
     memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(HAND); // 大端端口
+    addr.sin_port = htons(port); // 大端端口
     addr.sin_addr.s_addr = INADDR_ANY;
-    //     inet_pton(AF_INET, "192.168.1.100", &addr.sin_addr.s_addr);
-
+    // inet_pton(AF_INET, "192.168.1.100", &addr.sin_addr.s_addr);
     int ret = bind(lfd, (struct sockaddr *)&addr, sizeof(addr));
     if (ret < 0) {
         perror("bind");
@@ -25,7 +24,8 @@ Socket_con::Socket_con() // 服务器启动
         std::cerr << "Accept failed" << std::endl;
         return;
     }
-    std::cout << "服务器启动成功" << std::endl;
+    std::cout << "111111111111111服务器启动成功" << std::endl;
+    std::cout << "服务器ip为" << ip << std::endl;
 }
 
 // 返回客户端的fd

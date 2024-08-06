@@ -12,7 +12,7 @@
 class Socket_con {
 public:
     int lfd;
-    Socket_con(); // 服务器启动
+    Socket_con(int port,std::string ip); // 服务器启动
     ~Socket_con(){
         close(lfd);
     }

@@ -15,6 +15,7 @@ bool s_add_epoll(struct epoll_event *event, int epoll_fd, int server_fd) {
         close(epoll_fd);
         return false;
     }
+
     return true;
 }
 

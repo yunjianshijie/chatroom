@@ -59,6 +59,7 @@ Socket::Socket(int handle, char ip[30]) {
         }
         this->buf = buf;
         // main_t();
+        this->state = SUCCESS;
         int s_mode = SUCCESS;
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
@@ -88,10 +89,9 @@ void Socket::socket_do() {
                 } else if (account1.id == "-1") {
                     std::cout << "密码错误" << std::endl;
                     continue;
-                } else if (account1.id == "-3"){
+                } else if (account1.id == "-3") {
                     std::cout << "账号已登录" << std::endl;
-                }
-                else {
+                } else {
                     std::cout << "登录成功" << std::endl;
                     this->account = account1;
                     this->send_josn_login_success();
@@ -106,8 +106,8 @@ void Socket::socket_do() {
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 清理缓存区
                 // 要接收服务器返回的id
                 std::string id = this->receive_json_usr_id();
-                if (!(id.empty() || id== "error")  ) {   // 如果id不为空
-                    remember_id(id); // 记住id
+                if (!(id.empty() || id == "error")) { // 如果id不为空
+                    remember_id(id);                  // 记住id
                 } else {
                     std::cout << "注册失败" << std::endl;
                     continue;
@@ -158,7 +158,9 @@ std::string Socket::receive_json_usr_id() { // 接收 注册json数据
 
 bool Socket::send_string(std::string chuan) {
     try {
-        ssize_t lee = send(server_fd, chuan.c_str(), chuan.size(), 0);
+        std::cout << chuan << std::endl;
+        ssize_t lee = send(server_fd, chuan.c_str(), 1024, 0); // chuan.size(),
+        std::cout << "发送字符 :" << chuan << std::endl;
         if (lee == -1) {
             throw std::runtime_error("Error sending data");
         } else {
@@ -216,7 +218,7 @@ bool Socket::send_json_usr_register(Account &account) {
 }
 
 Account Socket::receive_json_usr_login() { // 接受 登录 数据 （是否成功登录）
-    // 发josn 数据 要有 name password question answer 
+    // 发josn 数据 要有 name password question answer
     Account account1;
     try {
         std::string str = this->receive_string(); //

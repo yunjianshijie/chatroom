@@ -1,4 +1,7 @@
-#define HAND  8000
+#define HAND  8085
+#define ServerAddr "0.0.0.0"
+#define MAX_EVENTS 40
+
 #define EXIT -11
 #define SUCCESS 0
 #define FAILURE -1
@@ -64,4 +67,3 @@
 //群组
 
 #define MAX 100
-

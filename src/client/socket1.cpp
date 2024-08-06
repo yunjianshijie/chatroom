@@ -9,6 +9,7 @@ void Socket::user_run() {
     printf("用户 %s 登录成功\n", account.name.c_str());
     while (true) {
         std::string choice = user_main(account.name, account.id);
+
         // //这里是选择
         // std::cout << " <1>  查看个人信息 " << std::endl;
         // std::cout << " <2>  查询用户信息 " << std::endl;
@@ -34,6 +35,7 @@ void Socket::user_run() {
             addFriend();
         } else if (choice == "6") { // 查看好友申请
             apply_FriendList();
+            // std::cout << "erewre" << std::endl;
         } else if (choice == "7") { // 查看群聊申请
             apply_GroupList();
         } else if (choice == "8") { // 添加群聊
@@ -91,6 +93,48 @@ void Socket::showFriendList() // 查看好友列表3
 {
     // 直接发请求看
     send_json_friend_list();
+    // 等待结果完成
+    {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, [this] { return this->result_ready; });
+        this->result_ready = false;
+    }
+    //std::cout << this->message_vec[0] << std::endl;
+    // 处理结果
+
+    std::cout << "选择你要操作的id" << std::endl;
+    std::string id;
+    std::cin >> id;
+    nlohmann::json json;
+    int h = 0;
+    for (auto it : this->message_vec) {
+        std::cout << it << std::endl;
+        json = nlohmann::json::parse(it);
+        if (json["id"] == id) {
+            h = 1;
+            break;
+        }
+    }
+    if (h == 0) {
+        std::cout << "没有该好友" << std::endl;
+        return;
+    }
+    std::cout << "选择你要进行的操作" << std::endl;
+    std::cout << " <1>  进入聊天页面 " << std::endl;
+    std::cout << " <2>  删除好友 " << std::endl;
+    std::string choice;
+    std::cin >> choice;
+    if (choice == "1") {
+        // 私聊
+    } else if (choice == "2") {
+        // 删除好友
+        nlohmann::json j;
+        j["mode"] = FRIEND_DELETE;
+        j["id"] = account.id;
+        j["friend_id"] = id;
+        send_string(j.dump()); // 发送删除好友请求
+    }
+    // 处理结果
 }
 void Socket::showGroupList() // 查看群聊列表4
 {
@@ -113,7 +157,6 @@ void Socket::addFriend() // 添加好友5
     json["name"] = account.name;
     send_string(json.dump()); // 发送添加好友请求
     // 查询用户
-
     {
         std::unique_lock<std::mutex> lock(mtx);
         cv.wait(lock, [this] { return this->result_ready; });
@@ -159,7 +202,7 @@ void Socket::send_change_name(std::string name) {
 // 接受函数
 std::string Socket::receive_message() {
     try {
-        // std::cout << "开始接受" << std::endl;
+        std::cout << "开始接受" << std::endl;
         char buffer[1024];
         ssize_t len = recv(this->server_fd, buffer, sizeof(buffer), 0);
         if (len == -1) {
@@ -181,8 +224,7 @@ std::string Socket::receive_message() {
 void Socket::receive_json() {
     while (true) {
         printf("dsklfnhljksdjhflkdsjkf\n");
-        std::string message = receive_message();
-
+        std::string message = receive_message(); // 接收消息
         std::cout << "收到消息" << message << std::endl;
         if (!message.empty() && message != "error" && message != "") {
             this->receive_josn_user(message); // 处理json
@@ -215,6 +257,11 @@ void Socket::print_friend_add(std::string message) {
         std::cout << "在线了给ta说哦~" << std::endl;
     } else {
         std::cout << "申请已发送" << std::endl;
+    }
+    {
+        std::unique_lock<std::mutex> lock(mtx);
+        this->result_ready = true;
+        cv.notify_one();
     }
 }
 
@@ -286,6 +333,11 @@ void Socket::print_friend_apply_list2(std::vector<std::string> vec) {
         // 这里加锁
         if (vec.empty()) {
             std::cout << "你还没有申请哦～" << std::endl;
+            {
+                std::unique_lock<std::mutex> lock(mtx);
+                this->result_ready = true;
+                cv.notify_one();
+            }
             return;
         }
         std::cout << "请输入要处理的序号" << std::endl;
@@ -316,6 +368,7 @@ void Socket::print_friend_apply_list2(std::vector<std::string> vec) {
         } else {
             std::cout << "输入错误" << std::endl;
         }
+        // 这里解锁
         {
             std::unique_lock<std::mutex> lock(mtx);
             this->result_ready = true;
@@ -372,6 +425,18 @@ void Socket::apply_FriendList() {
     }
 }
 //
+std::string Socket::send_json_friend_list() {
+    try {
+        nlohmann::json json;
+        json["mode"] = FRIEND_LIST;
+        json["id"] = this->account.id;
+        send_string(json.dump());
+        return json.dump();
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return "";
+}
 void Socket::apply_GroupList() {
     try {
         nlohmann::json json;
@@ -380,20 +445,38 @@ void Socket::apply_GroupList() {
     }
 }
 
-std::string Socket::send_json_friend_list() {
+void Socket::print_friend_list(std ::string message) {
     try {
-        nlohmann::json json;
-        json["mode"] = FRIEND_LIST;
-        json["id"] = this->account.id;
-        // std::cout << "____________________________dasd_______dasd__"<< std::endl;
-        send_string(json.dump());
+        nlohmann::json json = nlohmann::json::parse(message);
+        std::vector<std::string> vec = json["friend_list"];
+        this->message_vec = vec;
+        this->print_friend_list2(vec);
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
     }
 }
-
-void Socket::print_friend_list(std ::string message) {
+void Socket::print_friend_list2(std::vector<std::string> vec) {
+    std::cout << "好友列表" << std::endl;
+    std::cout << "---------------------------------------------" << std::endl;
     try {
+        int i = 1;
+        for (const auto &item : vec) {
+            nlohmann::json json = nlohmann::json::parse(item);
+            std::string id = json["id"];
+            std::string name = json["name"];
+            std::cout << "(" << i++ << ")" << "好友id: " << id << " 好友名字: " << name;
+            if (json["fd"] == "-1") {
+                std::cout << "   (离线)" << std::endl;
+            } else {
+                std::cout << "   (在线)" << std::endl;
+            }
+        }
+        std::cout << "---------------------------------------------" << std::endl;
+        {
+            std::unique_lock<std::mutex> lock(mtx);
+            this->result_ready = true;
+            cv.notify_one();
+        }
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
     }

@@ -323,4 +323,7 @@ CMakeFiles/server.dir/main.cpp.o: \
  /usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
  /home/yunjian/chatroom/src/server/chuli/../../include/back.hpp \
  /home/yunjian/chatroom/src/server/chuli/../../include/back.hpp \
- /home/yunjian/chatroom/src/server/threadpool.hpp
+ /home/yunjian/chatroom/src/server/threadpool.hpp /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h /usr/include/bits/fcntl-linux.h \
+ /usr/include/linux/falloc.h /usr/include/bits/stat.h \
+ /usr/include/bits/struct_stat.h
