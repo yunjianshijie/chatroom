@@ -201,6 +201,30 @@ epoll.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/epoll.cpp.s
 .PHONY : epoll.cpp.s
 
+home/yunjian/chatroom/src/include/read.o: home/yunjian/chatroom/src/include/read.cpp.o
+.PHONY : home/yunjian/chatroom/src/include/read.o
+
+# target to build an object file
+home/yunjian/chatroom/src/include/read.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/home/yunjian/chatroom/src/include/read.cpp.o
+.PHONY : home/yunjian/chatroom/src/include/read.cpp.o
+
+home/yunjian/chatroom/src/include/read.i: home/yunjian/chatroom/src/include/read.cpp.i
+.PHONY : home/yunjian/chatroom/src/include/read.i
+
+# target to preprocess a source file
+home/yunjian/chatroom/src/include/read.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/home/yunjian/chatroom/src/include/read.cpp.i
+.PHONY : home/yunjian/chatroom/src/include/read.cpp.i
+
+home/yunjian/chatroom/src/include/read.s: home/yunjian/chatroom/src/include/read.cpp.s
+.PHONY : home/yunjian/chatroom/src/include/read.s
+
+# target to generate assembly for a file
+home/yunjian/chatroom/src/include/read.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/home/yunjian/chatroom/src/include/read.cpp.s
+.PHONY : home/yunjian/chatroom/src/include/read.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -267,6 +291,9 @@ help:
 	@echo "... epoll.o"
 	@echo "... epoll.i"
 	@echo "... epoll.s"
+	@echo "... home/yunjian/chatroom/src/include/read.o"
+	@echo "... home/yunjian/chatroom/src/include/read.i"
+	@echo "... home/yunjian/chatroom/src/include/read.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

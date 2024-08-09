@@ -1,4 +1,7 @@
 #include "ui.hpp"
+#include <termios.h>
+#include <unistd.h>
+#define BACKSPACE 0x08
 void begin() {
     std::cout << "------------------------------------------" << std::endl;
     std::cout << "            欢迎来到chatroom              " << std::endl;
@@ -54,11 +57,42 @@ int login_ui(Account &account) {
     std::string id;
     std::cin >> id;
     std::cout << "输入你的账号密码: " << std::endl;
+    // 这里密码回显*
     std::string pass;
+    int i = 0;
+    char ch;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin >> pass;
-    std::cout << "------------------------------------------" << std::endl;
+    // system("stty -icanon"); // 设置一次性读完操作，即getchar()不用回车也能获取字符
+    // system("stty -echo");   // 关闭回显，即输入任何字符都不显示
+    // while (1) {
+    //     if (read(0, &ch, 1) < 0) {
+    //         break;
+    //     }
+    //     if (ch == '\n' || ch == '\r') {
+    //         break;
+    //     }
+    //     if (ch == BACKSPACE) {
+    //         if (i > 0) {
+    //             i--;
+    //             printf("\b \b");
+    //             continue;
+    //         }else{
+    //             i = 0;
+    //             continue;
+    //         }
+    //     }
+    //     pass += ch;
+    //     std::cout << "*";
+    //     std::cout.flush();
+    // }
+    // system("stty echo");   // 开启回显
+    // system("stty icanon"); // 关闭一次性读完操作，即getchar()必须回车也能获取字符
+    std::cout << "\n------------------------------------------" << std::endl;
     account.id = id;
     account.set_pass(pass);
+    std::cout << "\n"; // 手动换行，因为输入密码时没有回显，需要手动换行
+    std::cout << "pass:" << pass << std::endl;
     return 0; // 不用了
     // 给服务器发送登录请求
 }

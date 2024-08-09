@@ -125,12 +125,57 @@ CMakeFiles/client.dir/socket1.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/socket1.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yunjian/chatroom/src/client/socket1.cpp -o CMakeFiles/client.dir/socket1.cpp.s
 
+CMakeFiles/client.dir/socket2.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/socket2.cpp.o: /home/yunjian/chatroom/src/client/socket2.cpp
+CMakeFiles/client.dir/socket2.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yunjian/chatroom/src/client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/client.dir/socket2.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/socket2.cpp.o -MF CMakeFiles/client.dir/socket2.cpp.o.d -o CMakeFiles/client.dir/socket2.cpp.o -c /home/yunjian/chatroom/src/client/socket2.cpp
+
+CMakeFiles/client.dir/socket2.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/socket2.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yunjian/chatroom/src/client/socket2.cpp > CMakeFiles/client.dir/socket2.cpp.i
+
+CMakeFiles/client.dir/socket2.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/socket2.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yunjian/chatroom/src/client/socket2.cpp -o CMakeFiles/client.dir/socket2.cpp.s
+
+CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o: /home/yunjian/chatroom/src/include/read.cpp
+CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yunjian/chatroom/src/client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o -MF CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o.d -o CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o -c /home/yunjian/chatroom/src/include/read.cpp
+
+CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yunjian/chatroom/src/include/read.cpp > CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.i
+
+CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yunjian/chatroom/src/include/read.cpp -o CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.s
+
+CMakeFiles/client.dir/group.cpp.o: CMakeFiles/client.dir/flags.make
+CMakeFiles/client.dir/group.cpp.o: /home/yunjian/chatroom/src/client/group.cpp
+CMakeFiles/client.dir/group.cpp.o: CMakeFiles/client.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yunjian/chatroom/src/client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/client.dir/group.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/client.dir/group.cpp.o -MF CMakeFiles/client.dir/group.cpp.o.d -o CMakeFiles/client.dir/group.cpp.o -c /home/yunjian/chatroom/src/client/group.cpp
+
+CMakeFiles/client.dir/group.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/client.dir/group.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yunjian/chatroom/src/client/group.cpp > CMakeFiles/client.dir/group.cpp.i
+
+CMakeFiles/client.dir/group.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/client.dir/group.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yunjian/chatroom/src/client/group.cpp -o CMakeFiles/client.dir/group.cpp.s
+
 # Object files for target client
 client_OBJECTS = \
 "CMakeFiles/client.dir/main.cpp.o" \
 "CMakeFiles/client.dir/ui/user_long.cpp.o" \
 "CMakeFiles/client.dir/socket.cpp.o" \
-"CMakeFiles/client.dir/socket1.cpp.o"
+"CMakeFiles/client.dir/socket1.cpp.o" \
+"CMakeFiles/client.dir/socket2.cpp.o" \
+"CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o" \
+"CMakeFiles/client.dir/group.cpp.o"
 
 # External object files for target client
 client_EXTERNAL_OBJECTS =
@@ -139,9 +184,12 @@ client: CMakeFiles/client.dir/main.cpp.o
 client: CMakeFiles/client.dir/ui/user_long.cpp.o
 client: CMakeFiles/client.dir/socket.cpp.o
 client: CMakeFiles/client.dir/socket1.cpp.o
+client: CMakeFiles/client.dir/socket2.cpp.o
+client: CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o
+client: CMakeFiles/client.dir/group.cpp.o
 client: CMakeFiles/client.dir/build.make
 client: CMakeFiles/client.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/yunjian/chatroom/src/client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable client"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/yunjian/chatroom/src/client/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/client.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -24,7 +24,7 @@ Socket_con::Socket_con(int port,std::string ip) // 服务器启动
         std::cerr << "Accept failed" << std::endl;
         return;
     }
-    std::cout << "111111111111111服务器启动成功" << std::endl;
+    std::cout << "服务器启动成功" << std::endl;
     std::cout << "服务器ip为" << ip << std::endl;
 }
 

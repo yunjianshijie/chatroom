@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/client.dir/main.cpp.o CMakeFiles/client.dir/ui/user_long.cpp.o CMakeFiles/client.dir/socket.cpp.o CMakeFiles/client.dir/socket1.cpp.o -o client
+/usr/bin/c++ CMakeFiles/client.dir/main.cpp.o CMakeFiles/client.dir/ui/user_long.cpp.o CMakeFiles/client.dir/socket.cpp.o CMakeFiles/client.dir/socket1.cpp.o CMakeFiles/client.dir/socket2.cpp.o CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o CMakeFiles/client.dir/group.cpp.o -o client

@@ -1,4 +1,4 @@
-#define HAND  8085
+#define HAND  8087
 #define ServerAddr "0.0.0.0"
 #define MAX_EVENTS 40
 
@@ -61,9 +61,35 @@
 //查看好友列表
 #define FRIEND_LIST 22
 
+//私聊
+// 聊天消息
+#define FRIEND_MESSAGE 23
+// 离线消息
+#define OFFLINE_MESSAGE 24
+// 历史消息
+#define HISTORY_MESSAGE 25
+// 好友屏蔽
+#define FRIEND_SHIELD 26
+// 好友取消屏蔽
+#define FRIEND_UNSHIELD 27
+//被屏蔽了
+#define FRIEND_SHIELDED 28
 
-
-
-//群组
-
+//被删好友了，嘤嘤嘤
+#define FRIEND_DLEED 29
+//
 #define MAX 100
+
+//
+//群组
+//创建群聊
+#define GROUP_CREATE 30
+//群聊邀请成员
+#define GROUP_INVITE 32
+//查看群聊列表
+#define GROUP_LIST 33
+
+
+
+//群聊消息
+#define GROUP_MESSAGE 31

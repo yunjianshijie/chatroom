@@ -93,18 +93,6 @@ std::string Redis::getAccount(std::string id) { // 获on信息
             throw std::runtime_error("redisCommand error");
         }
         //  下层用json解析
-
-        // std::string json = "{\"";
-        // for (int i = 0; i < reply->elements; i += 2) {
-        //     json += reply->element[i]->str;
-        //     json += "\":\"";
-        //     json += reply->element[i + 1]->str;
-        //     json += "\",\"";
-        //     std::cout << reply->element[i]->str << ":" << reply->element[i + 1]->str << std::endl;
-        // }
-        // json.pop_back();
-        // json.pop_back();
-        // json += "}";
         nlohmann::json j;
         for (int i = 0; i < reply->elements; i += 2) {
             j[reply->element[i]->str] = reply->element[i + 1]->str;
@@ -482,7 +470,7 @@ void Redis::add_friend_list(std::string id, std::string friend_id) {
         std::string cmd = "SADD friend:" + id + " " + friend_id;
         redisReply *reply = (redisReply *)redisCommand(this->rc, cmd.c_str());
         if (reply == nullptr) {
-            throw std::runtime_error("11111redisCommand error");
+            throw std::runtime_error("redisCommand error");
         }
         if (reply->type != REDIS_REPLY_STATUS) {
             freeReplyObject(reply);
@@ -546,11 +534,12 @@ std::string Redis::get_friend_list(std::string id) {
         nlohmann::json json_array;
         for (int i = 0; i < reply->elements; i++) {
             std::string friend_id = reply->element[i]->str;
-           std::string temp= json_getUserInfo((friend_id));
+            std::string temp = json_getUserInfo((friend_id));
             friend_list.push_back(temp);
         }
         json_array["friend_list"] = friend_list;
         json_array["mode"] = FRIEND_LIST;
+        freeReplyObject(reply);
         return json_array.dump();
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
@@ -558,57 +547,177 @@ std::string Redis::get_friend_list(std::string id) {
     return "";
 }
 
-// Account Redis::isAccountExist(std::string id) { //判断账号是否存在
-//     Account account;
-//     try {
-//         redisReply *reply;
-//         std::string cmd = "HGETALL account:" + id;
-//         reply = (redisReply *)redisCommand(rc, cmd.c_str());
-//         if (reply == nullptr) {
-//             throw std::runtime_error("redisCommand error");
-//         }
-//         if (reply->type != REDIS_REPLY_ARRAY) {
-//             throw std::runtime_error("redisCommand error");
-//         }
-//         std::string pass;
-//         std::string answer;
-//         for (int i = 0; i < reply->elements; i += 2) { // elements 字段表示回复对象中包含的子元素的数量
-//             if (strcmp(reply->element[i]->str, "name") == 0) {
-//                 account.name = reply->element[i + 1]->str;
-//             } else if (strcmp(reply->element[i]->str, "password") == 0) {
-//                 pass = reply->element[i + 1]->str;
-//                 account.set_pass(pass);
-//             } else if (strcmp(reply->element[i]->str, "answer") == 0) {
-//                 answer = reply->element[i + 1]->str;
-//                 account.set_answer(answer);
-//             } else if (strcmp(reply->element[i]->str, "question") == 0) {
-//                 account.question = reply->element[i + 1]->str;
-//             }
-//         }
-//         freeReplyObject(reply);
-//         return account.toJsonString(-2);
-//     } catch (const std::exception &e) {
-//         std::cerr << e.what() << '\n';
-//         return "";
-//     }
-// }
+void Redis::list_write(std::string key, std::string value) {
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "LPUSH %s %s", key.c_str(), value.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        freeReplyObject(reply);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+std::vector<std::string> Redis::list_read(std::string key) {
+    std::vector<std::string> list;
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "LRANGE %s 0 -1", key.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
 
-// int main() {
-//     Redis redis;
-//     // std::string json = "{\"name\":\"123\",\"password\":\"123\",\"answer\":\"123\",\"question\":\"123\"}";
-//     // nlohmann::json j = nlohmann::json::parse(json); // json解析
-//     // std::string value = j.dump();
-//     // std::string name = j["name"];
-//     // std::string password = j["password"];
-//     // std::string answer = j["answer"];
-//     // std::string question = j["question"];
-//     // std::string id = redis.json_setAccount(json);
-//     // std::cout << "id:" << id << std::endl;
-//     // std::cout << "name:" << name << std::endl;
-//     // std::cout << "password:" << password << std::endl;
-//     // std::cout << "answer:" << answer << std::endl;
-//     // std::cout << "question:" << question << std::endl;
-//     std::string json2 = redis.json_getAccount("15");
-//     std::cout << "json2:" << json2 << std::endl;
-//     return 0;
-// }
+        for (int i = 0; i < reply->elements; i++) {
+            list.push_back(reply->element[i]->str);
+            // std::cout << reply->element[i]->str << std::endl;
+        }
+        return list;
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return list;
+}
+std::vector<std::string> Redis::key_exist(std::string key) {
+    std::vector<std::string> list;
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "KEYS %s", key.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        std::string qian = key;
+        for (int i = 0; i < reply->elements; i++) {
+            std::string new_key1 = reply->element[i]->str;
+            std::cout << new_key1 << std::endl;
+            std::string new_key = new_key1.substr(qian.length() - 1); // key.substr(.length());
+            std::cout << new_key << std::endl;
+            list.push_back(new_key);
+        }
+        return list;
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return list;
+}
+std::string Redis::list_del(std::string key) {
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "DEL %s", key.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        std::string value = reply->str;
+        freeReplyObject(reply);
+        return value;
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return "";
+}
+
+void Redis::add_set(std::string key, std::string value) {
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "SADD %s %s", key.c_str(), value.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        freeReplyObject(reply);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+void Redis::del_set(std::string key, std::string value) {
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "SREM %s %s", key.c_str(), value.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        freeReplyObject(reply);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+bool Redis::is_set(std::string key, std::string value) {
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "SISMEMBER %s %s", key.c_str(), value.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        if (reply->integer == 1) {
+            return true;
+        }
+        freeReplyObject(reply);
+        return false;
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+        return false;
+    }
+    return false;
+}
+std::string Redis::get_group_id() // 获取群id
+{
+    // 8位数，2个4位
+    try {
+        std::string id;
+        while (1) {
+            srand((unsigned)time(nullptr));
+            for (int i = 0; i < 2; i++) {
+                id += std::to_string(rand() % 9000 + 1000); // 生成4位随机数
+            }
+            std::string key = "group_ids";
+            if (this->is_set(key, id)) {
+                continue;
+            } else {
+                break;
+            }
+        }
+        return id;
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+        return "";
+    }
+}
+
+void Redis::set_hash(std::string key, std::string field, std::string value) {
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "HSET %s %s %s", key.c_str(), field.c_str(), value.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        freeReplyObject(reply);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+}
+std::vector<std::string> Redis::get_set(std::string key) {
+    // 获取set中的所有元素
+    //
+    std::vector<std::string> res;
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "SMEMBERS %s", key.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+
+        for (int i = 0; i < reply->elements; i++) {
+            res.push_back(reply->element[i]->str);
+        }
+        freeReplyObject(reply);
+        return res;
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return res;
+}
+
+std::string Redis::get_hash(std::string key, std::string field) {
+    try {
+        redisReply *reply = (redisReply *)redisCommand(this->rc, "HGET %s %s", key.c_str(), field.c_str());
+        if (reply == nullptr) {
+            throw std::runtime_error("redisCommand error");
+        }
+        std::string res = reply->str;
+        freeReplyObject(reply);
+        return res;
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+    return "";
+}

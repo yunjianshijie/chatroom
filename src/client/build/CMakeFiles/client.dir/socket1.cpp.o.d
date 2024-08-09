@@ -298,8 +298,8 @@ CMakeFiles/client.dir/socket1.cpp.o: \
  /usr/include/nlohmann/detail/macro_unscope.hpp \
  /usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
  /home/yunjian/chatroom/src/client/ui/ui.hpp \
- /home/yunjian/chatroom/src/client/ui/../../include/account.hpp \
  /home/yunjian/chatroom/src/client/ui/../../include/back.hpp \
+ /home/yunjian/chatroom/src/client/ui/../../include/account.hpp \
  /home/yunjian/chatroom/src/client/ui/../../include/back.hpp \
  /usr/include/c++/14.1.1/queue /usr/include/c++/14.1.1/deque \
  /usr/include/c++/14.1.1/bits/stl_deque.h \
@@ -312,4 +312,6 @@ CMakeFiles/client.dir/socket1.cpp.o: \
  /usr/include/c++/14.1.1/bits/unique_lock.h \
  /usr/include/c++/14.1.1/condition_variable \
  /usr/include/c++/14.1.1/bits/atomic_futex.h \
- /usr/include/c++/14.1.1/atomic
+ /usr/include/c++/14.1.1/atomic \
+ /home/yunjian/chatroom/src/client/../include/read.hpp \
+ /home/yunjian/chatroom/src/client/group.hpp

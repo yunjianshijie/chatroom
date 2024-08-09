@@ -19,7 +19,7 @@ set(CMAKE_CXX_STANDARD 17) # c17
 #  include_directories(${HIREDIS_INCLUDE_DIRS})
 # # Link hiredis libraries to the target after the target sources
 
-add_executable(server main.cpp chuli/redis.cpp socket.cpp epoll.cpp chuli/chuli.cpp)
+add_executable(server main.cpp chuli/redis.cpp socket.cpp epoll.cpp chuli/chuli.cpp ../include/read.cpp)
 
 target_link_libraries(server hiredis)
 

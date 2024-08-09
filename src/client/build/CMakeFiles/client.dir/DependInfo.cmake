@@ -8,9 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/yunjian/chatroom/src/client/group.cpp" "CMakeFiles/client.dir/group.cpp.o" "gcc" "CMakeFiles/client.dir/group.cpp.o.d"
+  "/home/yunjian/chatroom/src/include/read.cpp" "CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o" "gcc" "CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o.d"
   "/home/yunjian/chatroom/src/client/main.cpp" "CMakeFiles/client.dir/main.cpp.o" "gcc" "CMakeFiles/client.dir/main.cpp.o.d"
   "/home/yunjian/chatroom/src/client/socket.cpp" "CMakeFiles/client.dir/socket.cpp.o" "gcc" "CMakeFiles/client.dir/socket.cpp.o.d"
   "/home/yunjian/chatroom/src/client/socket1.cpp" "CMakeFiles/client.dir/socket1.cpp.o" "gcc" "CMakeFiles/client.dir/socket1.cpp.o.d"
+  "/home/yunjian/chatroom/src/client/socket2.cpp" "CMakeFiles/client.dir/socket2.cpp.o" "gcc" "CMakeFiles/client.dir/socket2.cpp.o.d"
   "/home/yunjian/chatroom/src/client/ui/user_long.cpp" "CMakeFiles/client.dir/ui/user_long.cpp.o" "gcc" "CMakeFiles/client.dir/ui/user_long.cpp.o.d"
   )
 

@@ -8,6 +8,8 @@
 #include <mutex>
 #include <functional>
 #include <future>
+#include <time.h>
+#include <cstdlib>
 #include "../../include/account.hpp"
 #include "../../include/back.hpp"
 #include <nlohmann/json.hpp>
@@ -53,25 +55,47 @@ public:
     // json获取用户信息
     std::string json_getUserInfo(std::string id);
     //
-    //在线fd 对应uid 
-    //设置在线
-    void set_online(std::string id, std::string fd);//
-    //获取在线
+    // 在线fd 对应uid
+    // 设置在线
+    void set_online(std::string id, std::string fd); //
+    // 获取在线
     std::string get_online(std::string id);
-    //设置离线
+    // 设置离线
     void set_offline(std::string fd);
     //
-    //
-    //好友设置，好友申请列表（待处理）
-    void set_friend(std::string id, std::string friend_id);
-    //添加每个人的好友（好友申请列表）  
-    void apply_friend(std::string id, std::string friend_id,std::string friend_name,std::string msg);
-    //获取好友申请列表
+    // // 好友设置，好友申请列表（待处理）
+    // void set_friend(std::string id, std::string friend_id);
+    // 添加每个人的好友（好友申请列表）
+    void apply_friend(std::string id, std::string friend_id, std::string friend_name, std::string msg);
+    // 获取好友申请列表
     std::string get_apply_friend(std::string id);
-    //每个人好友列表
+    // 每个人好友列表
     void add_friend_list(std::string id, std::string friend_id);
-    //删除好友申请列表
-    void del_apply_friend(std::string id,std::string  friend_id);
-    //获取好友列表
+    // 删除好友申请列表
+    void del_apply_friend(std::string id, std::string friend_id);
+    // 获取好友列表
     std::string get_friend_list(std::string id);
+    // 对于有序list 写入
+    void list_write(std::string key, std::string value);
+    // 有序list读出
+    std::vector<std::string> list_read(std::string key);
+    // 有序list删除
+    std::string list_del(std::string key);
+    // 有序列表获取长度
+    int list_len(std::string key);
+    //  查询key键是否存在
+    std::vector<std::string> key_exist(std::string key);
+    // 集合添加
+    void add_set(std::string key, std::string value);
+    // 集合删除
+    void del_set(std::string key, std::string value);
+    // 集合查询
+    std::vector<std::string> get_set(std::string key);
+    // 查询集合元素
+    bool is_set(std::string key, std::string value);
+    // 获取群id
+    std::string get_group_id();
+    //哈希表设置
+    void set_hash(std::string key, std::string field, std::string value);
+    std::string get_hash(std::string key, std::string field);
 };

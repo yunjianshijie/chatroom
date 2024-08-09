@@ -20,6 +20,9 @@ int main(int argc, char *argv[]) {
     // } else if (argc == 1) {
     //     port = atoi(argv[1]);
     // }
+    if(argc == 2){
+        port = atoi(argv[1]);
+    }
     Socket_con server(port, serverAddr);
     //
     std::cout << "1" << std::endl;
@@ -104,8 +107,10 @@ int main(int argc, char *argv[]) {
 }
 
 void work(int client_fd, Redis &redis, int epoll_fd) {
-    char buf[1024];
-    int len = recv(client_fd, buf, 1024, 0);
+    // char buf[1024];
+    // int len = recv(client_fd, buf, 1024, 0);
+    std::string buf;
+    int len = recvMsg(client_fd, buf);
     if (len <= 0) {
         close(client_fd);
     }
@@ -132,11 +137,12 @@ void work(int client_fd, Redis &redis, int epoll_fd) {
     std::string ret = fanhui(str, redis, client_fd);
     printf("返回给客户端 fd %d : %s\n", client_fd, ret.c_str());
     if (ret == "error" || ret == "") {
-        //这里也要挂上去。。。
+        // 这里也要挂上去。。。
         epoll_ctl(epoll_fd, EPOLL_CTL_ADD, client_fd, &temp);
         return;
     }
-    send(client_fd, ret.c_str(), 1024, 0); // 发送消息
+    // send(client_fd, ret.c_str(), 1024, 0); // 发送消息
+    send_meg(client_fd, ret);
     std::cout << "发送 给 fd" << client_fd << " :" << ret << std::endl;
     // 发给客户端指令
     // 这个

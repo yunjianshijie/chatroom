@@ -310,4 +310,12 @@ CMakeFiles/server.dir/chuli/chuli.cpp.o: \
  /usr/include/asm/posix_types_64.h /usr/include/asm-generic/posix_types.h \
  /usr/include/asm/bitsperlong.h /usr/include/asm-generic/bitsperlong.h \
  /usr/include/asm/sockios.h /usr/include/asm-generic/sockios.h \
- /usr/include/bits/types/struct_osockaddr.h
+ /usr/include/bits/types/struct_osockaddr.h \
+ /home/yunjian/chatroom/src/server/chuli/../../include/read.hpp \
+ /usr/include/arpa/inet.h /usr/include/netinet/in.h \
+ /usr/include/bits/in.h /usr/include/c++/14.1.1/optional \
+ /usr/include/c++/14.1.1/stdlib.h /usr/include/unistd.h \
+ /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
+ /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
+ /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h /usr/include/c++/14.1.1/chrono

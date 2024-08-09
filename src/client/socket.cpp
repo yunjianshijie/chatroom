@@ -5,7 +5,6 @@ Socket::Socket(int handle, char ip[30]) {
         mode = SUCCESS;
         this->server_fd = socket(AF_INET, SOCK_STREAM, 0); // 这里其实 是server_fd
         //   自己的fd
-
         if (server_fd < 0) {
             throw std::runtime_error("Error creating socket");
         }
@@ -29,24 +28,18 @@ Socket::Socket(int handle, char ip[30]) {
         j["c_fd"] = this->client_fd;
         std::string s = j.dump();
 
-        // char test1[100] = "{\"mode\": 0}";
-
-        // 发送0
-        ssize_t lee = send(server_fd, s.c_str(), s.size() + 2, 0);
-
+        ssize_t lee = send_meg(server_fd, s);
         if (lee == -1) {
             std::cerr << "Failed to send data" << std::endl;
             printf("发送失败");
-            // ssize_t lee = send(server_fd, test1, sizeof(test1), 0);
             throw std::runtime_error("Error sending data");
         } else if (lee < s.size()) {
             printf("发送少字");
             throw std::runtime_error("Error sending data");
         }
         std::cout << "发送正常..." << std::endl;
-        char buf[1024];
-        memset(buf, 0, sizeof(buf));
-        int len = read(server_fd, buf, sizeof(buf));
+        std::string buf;                   // 接收数据
+        int len = recvMsg(server_fd, buf); // 接收数据
         std::cout << "接收到的数据为：" << buf << std::endl;
         nlohmann::json j1;
         j1 = nlohmann::json::parse(buf);
@@ -96,6 +89,8 @@ void Socket::socket_do() {
                     this->account = account1;
                     this->send_josn_login_success();
                     user_run();
+              //      std::cout << "dfsfsf" << std::endl;
+                    continue;
                 }
                 // 给服务器发送登录请求
                 //  从redis里面找到账号信息
@@ -158,13 +153,12 @@ std::string Socket::receive_json_usr_id() { // 接收 注册json数据
 
 bool Socket::send_string(std::string chuan) {
     try {
-        std::cout << chuan << std::endl;
-        ssize_t lee = send(server_fd, chuan.c_str(), 1024, 0); // chuan.size(),
-        std::cout << "发送字符 :" << chuan << std::endl;
-        if (lee == -1) {
+        // std::cout << chuan << std::endl;
+        int len = send_meg(server_fd, chuan);
+        if (len == -1) {
             throw std::runtime_error("Error sending data");
         } else {
-            if (lee < chuan.size()) {
+            if (len < chuan.size()) {
                 throw std::runtime_error("Error sending data");
                 // 传大东西这里用多次传那种吧
             }
@@ -178,9 +172,11 @@ bool Socket::send_string(std::string chuan) {
 std::string Socket::receive_string() { // 接受数据
 
     try {
-        char buf[1024];
-        memset(buf, 0, sizeof(buf));
-        int len = recv(server_fd, buf, sizeof(buf), 0);
+        // char buf[1024];
+        // memset(buf, 0, sizeof(buf));
+        // int len = recv(server_fd, buf, sizeof(buf), 0);
+        std::string buf;
+        int len = recvMsg(server_fd, buf);
         if (len == -1) {
             throw std::runtime_error("Error receiving data");
         }
@@ -308,14 +304,14 @@ std::string Socket::send_josn_login_success() { // std::string id, int fd
 
 std::string Socket::send_json_usr_exit() {
     try {
-        std::string json_str;
         nlohmann::json j;
         j["mode"] = EXIT;           // 登录模式
         j["id"] = this->account.id; // account.id;
         send_string(j.dump());      // 发送
-        return json_str;
+       // printf("dsfssf\n");
+        return j.dump();
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
-        return "exit";
     }
+    return "";
 }

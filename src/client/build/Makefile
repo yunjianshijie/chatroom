@@ -129,6 +129,54 @@ client/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
 .PHONY : client/fast
 
+group.o: group.cpp.o
+.PHONY : group.o
+
+# target to build an object file
+group.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/group.cpp.o
+.PHONY : group.cpp.o
+
+group.i: group.cpp.i
+.PHONY : group.i
+
+# target to preprocess a source file
+group.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/group.cpp.i
+.PHONY : group.cpp.i
+
+group.s: group.cpp.s
+.PHONY : group.s
+
+# target to generate assembly for a file
+group.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/group.cpp.s
+.PHONY : group.cpp.s
+
+home/yunjian/chatroom/src/include/read.o: home/yunjian/chatroom/src/include/read.cpp.o
+.PHONY : home/yunjian/chatroom/src/include/read.o
+
+# target to build an object file
+home/yunjian/chatroom/src/include/read.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o
+.PHONY : home/yunjian/chatroom/src/include/read.cpp.o
+
+home/yunjian/chatroom/src/include/read.i: home/yunjian/chatroom/src/include/read.cpp.i
+.PHONY : home/yunjian/chatroom/src/include/read.i
+
+# target to preprocess a source file
+home/yunjian/chatroom/src/include/read.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.i
+.PHONY : home/yunjian/chatroom/src/include/read.cpp.i
+
+home/yunjian/chatroom/src/include/read.s: home/yunjian/chatroom/src/include/read.cpp.s
+.PHONY : home/yunjian/chatroom/src/include/read.s
+
+# target to generate assembly for a file
+home/yunjian/chatroom/src/include/read.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.s
+.PHONY : home/yunjian/chatroom/src/include/read.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -201,6 +249,30 @@ socket1.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/socket1.cpp.s
 .PHONY : socket1.cpp.s
 
+socket2.o: socket2.cpp.o
+.PHONY : socket2.o
+
+# target to build an object file
+socket2.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/socket2.cpp.o
+.PHONY : socket2.cpp.o
+
+socket2.i: socket2.cpp.i
+.PHONY : socket2.i
+
+# target to preprocess a source file
+socket2.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/socket2.cpp.i
+.PHONY : socket2.cpp.i
+
+socket2.s: socket2.cpp.s
+.PHONY : socket2.s
+
+# target to generate assembly for a file
+socket2.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/socket2.cpp.s
+.PHONY : socket2.cpp.s
+
 ui/user_long.o: ui/user_long.cpp.o
 .PHONY : ui/user_long.o
 
@@ -234,6 +306,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... client"
+	@echo "... group.o"
+	@echo "... group.i"
+	@echo "... group.s"
+	@echo "... home/yunjian/chatroom/src/include/read.o"
+	@echo "... home/yunjian/chatroom/src/include/read.i"
+	@echo "... home/yunjian/chatroom/src/include/read.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -243,6 +321,9 @@ help:
 	@echo "... socket1.o"
 	@echo "... socket1.i"
 	@echo "... socket1.s"
+	@echo "... socket2.o"
+	@echo "... socket2.i"
+	@echo "... socket2.s"
 	@echo "... ui/user_long.o"
 	@echo "... ui/user_long.i"
 	@echo "... ui/user_long.s"

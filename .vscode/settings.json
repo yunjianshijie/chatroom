@@ -82,7 +82,17 @@
     "bitset": "cpp",
     "csignal": "cpp",
     "*.ipp": "cpp",
-    "queue": "cpp"
+    "queue": "cpp",
+    "csetjmp": "cpp",
+    "strstream": "cpp",
+    "cfenv": "cpp",
+    "complex": "cpp",
+    "typeindex": "cpp",
+    "buffer": "cpp",
+    "executor": "cpp",
+    "io_context": "cpp",
+    "netfwd": "cpp",
+    "socket": "cpp"
   },
   "cmake.sourceDirectory": "/home/yunjian/chatroom/src/client"
 }

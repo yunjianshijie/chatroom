@@ -1,0 +1,8 @@
+# ninja log v6
+1	1425	1723138222917242390	CMakeFiles/client.dir/main.cpp.o	2091c503353e6633
+2	2762	1723138222917242390	CMakeFiles/client.dir/ui/user_long.cpp.o	b7bfe7710fd6fa98
+2	3323	1723138222920575715	CMakeFiles/client.dir/socket.cpp.o	1e0c9e8c85c2c1c2
+3323	3447	1723138226240568332	client	9b5cfa10906b75ce
+3	3099	1723138222920575715	CMakeFiles/client.dir/socket1.cpp.o	21326b809eb2987d
+3	518	1723138222920575715	CMakeFiles/client.dir/home/yunjian/chatroom/src/include/read.cpp.o	43bf00178e4aaef4
+3	2919	1723138222920575715	CMakeFiles/client.dir/socket2.cpp.o	fd3f226ee63034d6

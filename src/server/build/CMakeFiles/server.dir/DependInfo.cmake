@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/yunjian/chatroom/src/server/chuli/chuli.cpp" "CMakeFiles/server.dir/chuli/chuli.cpp.o" "gcc" "CMakeFiles/server.dir/chuli/chuli.cpp.o.d"
   "/home/yunjian/chatroom/src/server/chuli/redis.cpp" "CMakeFiles/server.dir/chuli/redis.cpp.o" "gcc" "CMakeFiles/server.dir/chuli/redis.cpp.o.d"
   "/home/yunjian/chatroom/src/server/epoll.cpp" "CMakeFiles/server.dir/epoll.cpp.o" "gcc" "CMakeFiles/server.dir/epoll.cpp.o.d"
+  "/home/yunjian/chatroom/src/include/read.cpp" "CMakeFiles/server.dir/home/yunjian/chatroom/src/include/read.cpp.o" "gcc" "CMakeFiles/server.dir/home/yunjian/chatroom/src/include/read.cpp.o.d"
   "/home/yunjian/chatroom/src/server/main.cpp" "CMakeFiles/server.dir/main.cpp.o" "gcc" "CMakeFiles/server.dir/main.cpp.o.d"
   "/home/yunjian/chatroom/src/server/socket.cpp" "CMakeFiles/server.dir/socket.cpp.o" "gcc" "CMakeFiles/server.dir/socket.cpp.o.d"
   )

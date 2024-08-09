@@ -1,17 +1,4 @@
-// // #include <iostream>
-// // #include <string>
-// // #include <arpa/inet.h>
-// // #include <sys/types.h>
-// // #include <sys/socket.h>
-// // #include <netinet/in.h>
-// // #include <cstring>
-// // #include <optional>
-// // #include <stdlib.h>
-// // #include <unistd.h>
-// // #include "../include/back.hpp"
-// // #include <nlohmann/json.hpp>
-// // #include "ui/ui.hpp"
-// #include "user.hpp"
+
 #include <iostream>
 #include <string>
 #include <arpa/inet.h>
@@ -28,6 +15,8 @@
 #include <queue>
 #include <thread>
 #include <future>
+#include "../include/read.hpp"
+
 class Socket {
 private:
     /* data */
@@ -55,9 +44,11 @@ private:
     std::mutex mtx;
     std::condition_variable cv;
     bool result_ready = false;
-    int state ;
+    int state;           // 状态 登录，私聊 群聊
+    std::string char_id; // 聊天对象id , 群聊id
     std::string message;
     std::vector<std::string> message_vec;
+
 public:
     int server_fd;
     std::string buf;                 // 服务器传回来的信息
@@ -95,7 +86,7 @@ public:
     // 进入用户界面
     void user_run();
     // 查看自己信息1
-    void showSelfInfo();
+    void showSelfInfo(int n);
     // 查询用户2
     void queryUser();
     // 查看好友列表3
@@ -127,11 +118,15 @@ public:
     // 线程接收消息
     void receive_json();
     //
-    void receive_josn_user(std::string massage);
+    int receive_josn_user(std::string massage);
 
     // 发送
     // 发送好友同样消息
     std::string send_json_friend_apply(std::string id, std::string friend_id, std::string chioce);
+    // 屏蔽好友
+    std::string send_json_friend_shield(std::string friend_id);
+    // 取消屏蔽好友
+    std::string send_json_friend_unshield(std::string friend_id);
 
     // 打印用户信息
     void print_user_qu(std::string massage);
@@ -141,11 +136,29 @@ public:
     void print_friend_apply_list2(std::vector<std::string> vec); // 打印好友申请列表2
     void print_friend_list(std::string message);                 // 打印好友列表
     void print_friend_list2(std::vector<std::string> vec);
+    void print_friend_message(std::string message);
+    // 私聊
+    void private_chat(std::string id, std::string friend_id, std::string friend_name, std::string fd);
+    // 发送
+    std::string send_josn_chat_frined(std::string id, std::string friend_id, std::string msg, std::string fd, std::string send_id);
 
+    // 群聊
+    void print_friend_history_message(std::string message);
+    void print_friend_history_message2(std::vector<std::string> vec);
+    void print_login_success(std::string message);
+    void print_friend_shield(std::string message);
+    void print_friend_unshield(std::string message);
+    void print_friend_shielded(std::string message);
+    void print_friend_dleed(std::string message);
+    void print_group_create(std::string message);
+    void print_group_list(std::string message);
+};
 
-    //私聊
-    void private_chat(std::string id,std::string friend_id);
-    
-    //群聊
-
+class Group {
+private:
+    // 这个类中包含一个Socket对象
+    Socket socket;
+public:
+    Group(Socket socket);
+    ~Group();
 };
